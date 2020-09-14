@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import {COLORS} from '../../../../utils/colors'
 
 export const ButtonStyle = styled.button`
-    background: ${COLORS.fontColor};
+    background: ${props => props.theme.colors.fontColor};
     border-radius: 12px;
-    color: ${COLORS.header};
+    color: ${props => props.theme.colors.write};
     font-weight: bold;
     font-size: 22px;
     line-height: 26px;

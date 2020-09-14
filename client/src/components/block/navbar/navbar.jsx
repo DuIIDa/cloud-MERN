@@ -16,8 +16,8 @@ const Navbar = () => {
                 <ContentBlock>
                     <Button text={'Войти'} to='/login'>
                     </Button>
+
                     <Button text={'Регистрация'} to='/registration'>
-                        
                     </Button>
                 </ContentBlock>
 

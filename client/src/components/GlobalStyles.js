@@ -1,5 +1,4 @@
 import {createGlobalStyle} from 'styled-components'
-import {COLORS} from '../utils/colors'
 
 const GlobalStyle = createGlobalStyle`
   * { 
@@ -9,11 +8,11 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         margin: 0;
-        background: ${COLORS.bgColor};
+        background: ${props => props.theme.colors.bgColor};
         font-family: sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        color: ${COLORS.fontColor};
+        color: ${props => props.theme.colors.fontColor};
     }
 `
 

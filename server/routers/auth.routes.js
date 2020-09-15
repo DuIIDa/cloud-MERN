@@ -8,6 +8,9 @@ const bcrypt = require('bcryptjs') // для hash пароля
 const {check, validationResult} = require("express-validator")
 const jwt = require('jsonwebtoken') // Создает токен
 const router = new Router() // обратка запроса
+const authMiddleware = require('../middleware/auth.middleware')
+
+
 
 // Обрабатываем пост запрос на регистрацию
 // req = Запрос, res = Ответ
@@ -40,12 +43,13 @@ router.post('/registration',
         return res.json({message: 'User was created!'})
         
     } catch (error) {
+        console.log('email, password: ', email, password);
         console.log(error)
-        res.send({message: 'Server error'})
+        res.send({message: 'Server error!'})
     }
 })
 
-router.post('/login', 
+router.post('/login',
     async (req, res) => {
     try {
         const secretKey = config.get('secretKey')
@@ -76,7 +80,33 @@ router.post('/login',
 
     } catch (error) {
         console.log(error)
-        res.send({message: 'Server error'})
+        res.send({message: 'Server error!'})
+    }
+})
+
+// Используем middleWare Для побочки
+// проверяем наличие пользователя
+router.get('/auth', authMiddleware,
+    async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.user.id})
+        const secretKey = config.get('secretKey')
+
+        const token = jwt.sign({id: user.id}, secretKey, {expiresIn: '1h'})
+
+        return res.json({
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                diskSpace: user.diskSpace,
+                usedSpace: user.usedSpace,
+                avatar: user.avatar
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        res.send({message: 'Server error!'})
     }
 })
 

@@ -5,7 +5,7 @@ export const ButtonStyle = styled.button`
     display: inline-block;
     position: relative;
     text-decoration: none;
-    color: ${props => props.theme.colors.write};
+    color: ${props => props.theme.colors.fontColor};
     text-transform: capitalize;
     font-size: 18px;
     font-weight : bold;
@@ -28,6 +28,7 @@ export const ButtonStyle = styled.button`
         opacity: 0;
         height: 100%;
         width: 40px;
+        color: ${props => props.theme.colors.write}
     }
 
     &:hover {

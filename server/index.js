@@ -24,10 +24,8 @@ app.use('/api/auth', authRouter)
 // Делаем ее async т.к подключаемся к базе
 const start = async () => {
     try {
-
         await mongoose.connect(URL)
 
-        
         // Пеер. параметр номер порта
         // 2 параметр фукнция вызывается сразу посде
         // запуска  сервера

@@ -1,29 +1,29 @@
 import React, {useState} from 'react';
 
 import Input from '../../controls/inputs/inputsForm/input'
-import ButtonReg from '../../controls/buttons/buttonsForm/buttonReg'
+import ButtonLog from '../../controls/buttons/buttonsForm/buttonLog'
 import {Container} from '../../Container'
 
-import {FormBlock, Title} from './registrationStyle'
+import {FormBlock, Title} from './loginStyle'
 
-import {registration} from '../../../actions/index'
+import {login} from '../../../actions/index'
 
-const Registration = () => {
+const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     return (
         <Container>
             <FormBlock>
-                <Title>Регистрация</Title>
+                <Title>Вход</Title>
                 <Input value={email} setValue={setEmail} placeholder='Email' type='text'></Input>
                 <Input value={password} setValue={setPassword} placeholder='Password' type='password'></Input>
                 <div>
-                    <ButtonReg text='Регистрация' email={email} password={password} actionFunc={registration}></ButtonReg>
+                    <ButtonLog text='Войти' email={email} password={password} actionFunc={login}></ButtonLog>
                 </div>
             </FormBlock>      
         </Container>
     )
 }
 
-export default Registration
+export default Login

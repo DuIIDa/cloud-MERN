@@ -2,7 +2,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('config')
+
 const authRouter = require('./routers/auth.routes')
+const FileRouter = require('./routers/file.routes')
 
 const corsMiddleware = require('./middleware/cors.middleware')
 
@@ -16,6 +18,7 @@ const URL = config.get('dbUrl')
 app.use(corsMiddleware)
 app.use(express.json())
 app.use('/api/auth', authRouter)
+app.use('/api/files', FileRouter)
 
 
 // Функция для подключение к базе данных

@@ -1,5 +1,6 @@
 {
     "serverPort": 5000,
     "dbUrl": "mongodb+srv://Dmitriy:123321@cloud.hnycf.mongodb.net/cloud?retryWrites=true&w=majority",
-    "secretKey": "secret-key"
+    "secretKey": "secret-key",
+    "filePath": "D:\\JS проекты\\React\\Учеба\\Cloud(MERN)\\server\\files"
 }

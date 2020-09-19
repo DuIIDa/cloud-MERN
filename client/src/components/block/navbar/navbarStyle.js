@@ -3,11 +3,12 @@ import styled from 'styled-components'
 export const NavbarContainer = styled.div`
     background: ${props => props.theme.colors.write};
     box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
+    min-width: 345px;
 `
 
 export const NavbarBlock = styled.div`
-    margin: 0 auto;
     max-width: 1140px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

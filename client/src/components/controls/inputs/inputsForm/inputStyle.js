@@ -9,6 +9,7 @@ export const InputStyle = styled.input`
     font-weight: bold;
     font-size: 18px;
     line-height: 21px;
+    width: 100%;
 
     &:hover {
         transform: scale(1.03)

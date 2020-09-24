@@ -6,6 +6,7 @@ import {getFiles} from '../../../actions/index'
 import {DiskHeadContainer, Title, BtnBlock} from './diskStyle'
 import {BtnBack, BtnCreateDir} from '../../controls/buttons/btnDisk/index'
 import FileLIst from './fileList/fileList'
+import { Popup } from './popup/Popup';
 
 const Disk  = () => {
     const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Disk  = () => {
             </DiskHeadContainer>
 
             <FileLIst></FileLIst>
+            <Popup></Popup>
         </div>
     )
 }

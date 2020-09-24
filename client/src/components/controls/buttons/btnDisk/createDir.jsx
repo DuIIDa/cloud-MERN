@@ -1,11 +1,19 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {Button} from './btnStyle'
 
+import {setPopupDisplay} from '../../../../actions/index'
+
 export const BtnCreateDir = () => {
+    const dispatch = useDispatch()
+
+    const showPopupHandler = () => {
+        dispatch(setPopupDisplay('flex'))
+    }
 
     return (
-        <Button>
+        <Button onClick={()=> showPopupHandler()}>
             Создать новую папку
         </Button>
     )

@@ -7,7 +7,8 @@ export const Button = styled.button`
     font-size: 14px;
     line-height: 16px;
     color: ${props => props.theme.colors.fontColor};
-
+    cursor: pointer;
+    
     &:not(:last-child) {
         margin-bottom: 18px
     }

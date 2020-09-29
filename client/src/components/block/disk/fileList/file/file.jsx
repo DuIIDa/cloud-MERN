@@ -18,6 +18,7 @@ const File  = ({file}) => {
             id: file._id,
             path: file.path
         }))
+
     }
 
     return (

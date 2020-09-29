@@ -9,7 +9,7 @@ const FileRouter = require('./routers/file.routes')
 
 const corsMiddleware = require('./middleware/cors.middleware')
 
-const app = express() //Создаем сервер
+const app = express() //Создаем сервеР
 
 // Получаем номер порта(Предварительно)
 // Создав папку с default.json 

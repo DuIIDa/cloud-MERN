@@ -8,6 +8,7 @@ import {setCurrentDir, pushToStack} from '../../../../../actions/index'
 
 import {Img, FileBox, FileName, FileDate, FileSize} from './fileStyle'
 
+
 const File  = ({file}) => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state => state.files.currentDir)

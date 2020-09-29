@@ -1,0 +1,12 @@
+//Запуск
+npx webpack //Коспиляция
+
+npm run watch //Автоом
+
+npm run dev // Зпуск в режиме разработки
+
+
+//Настройка
+npm init -y
+npm install webpack webpack-cli --save-dev
++все настроки неходяться в webpack.config.js

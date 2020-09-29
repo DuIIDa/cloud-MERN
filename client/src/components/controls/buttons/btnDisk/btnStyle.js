@@ -21,3 +21,16 @@ export const Button = styled.button`
         outline: 0;
     }
 `
+
+export const DiskUpload = styled.div`
+    display: flex;
+    align-items: center;
+`
+export const InputFile = styled.input`
+    display: none;
+`
+export const LabelFile  = styled.label`
+    border: 2px dashed ${props => props.theme.colors.fontColor};
+    padding: 8px 20px;
+    cursor: pointer;
+`

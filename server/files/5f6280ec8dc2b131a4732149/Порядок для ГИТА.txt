@@ -1,0 +1,26 @@
+$ git status
+On branch master
+
+$ git checkout -b lesson_2
+
+$ git status
+On branch lesson_2
+
+$ git status
+On branch lesson_2//Δελΰώ δη
+
+$ git add .
+
+$ git commit -m "add script"
+
+$ git status
+On branch lesson_2
+
+$ git push
+$ git push --set-upstream origin lesson_2
+
+git checkout master
+
+$ git merge lesson_2
+
+git push

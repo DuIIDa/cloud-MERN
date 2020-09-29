@@ -1,10 +1,15 @@
 import {SET_FILES, SET_СURRENT_DIR, 
-    ADD_FILE, SET_POPUP_DISPLAY} from '../constants/index'
+    ADD_FILE, SET_POPUP_DISPLAY, 
+    PUSH_TO_STACK} from '../constants/index'
 
 const initialState = {
     files: [],
-    currentDir: null,
-    popupDisplay: 'none'
+    currentDir: {
+        id: null,
+        path: null,
+    },
+    popupDisplay: 'none',
+    dirStack: []
 }
 
 export default function fileReducer(state = initialState, action) {
@@ -12,7 +17,9 @@ export default function fileReducer(state = initialState, action) {
         case SET_FILES: return {...state, files: action.payload}
         case SET_СURRENT_DIR: return {...state, currentDir: action.payload}
         case ADD_FILE: return {...state, files: [...state.files, action.payload]}
-        case SET_POPUP_DISPLAY: return {...state, popupDisplay: action.payload} 
+        case SET_POPUP_DISPLAY: return {...state, popupDisplay: action.payload}
+        case PUSH_TO_STACK: return {...state, dirStack: [...state.dirStack, action.payload]}
+
         default:
             return state
     }

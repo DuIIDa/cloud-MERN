@@ -11,14 +11,14 @@ import { Popup } from './popup/Popup';
 const Disk  = () => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state=> state.files.currentDir)
-    
+
     useEffect(() => {
-        dispatch(getFiles(currentDir))
-    }, [currentDir])
+        dispatch(getFiles(currentDir.id))
+    }, [currentDir])// eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <div>
-            <Title>Title</Title>
+            <Title>{currentDir.id ? currentDir.path : 'Главная страница'}</Title>
             <DiskHeadContainer>
                 
                 <BtnBlock>

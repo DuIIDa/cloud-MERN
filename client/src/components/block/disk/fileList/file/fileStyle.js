@@ -7,8 +7,9 @@ export const FileBox = styled.div`
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
     align-items: center;
+    cursor: pointer;
 
-    &: hover {
+    &:hover {
         transform: scale(1.02);
     }
 `

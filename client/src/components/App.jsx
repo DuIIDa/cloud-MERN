@@ -25,7 +25,7 @@ function App() {
 
     useEffect(() => {
         localStorage.getItem('token') && dispatch(auth())
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <BrowserRouter>

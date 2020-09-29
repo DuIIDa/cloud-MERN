@@ -1,7 +1,8 @@
 //Импортируем все зависимости дял работы сервера
 const express = require('express')
 const mongoose = require('mongoose')
-const config = require('config')
+const config = require('config') // для достования данных из конфига
+const fileUpload = require('express-fileupload') // Для загрузки фалов на сервер
 
 const authRouter = require('./routers/auth.routes')
 const FileRouter = require('./routers/file.routes')
@@ -15,6 +16,7 @@ const app = express() //Создаем сервер
 const PORT = config.get('serverPort')
 const URL = config.get('dbUrl')
 
+app.use(fileUpload({}))
 app.use(corsMiddleware)
 app.use(express.json())
 app.use('/api/auth', authRouter)

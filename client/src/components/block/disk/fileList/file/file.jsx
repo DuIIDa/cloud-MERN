@@ -6,7 +6,10 @@ import fileLogo from '../../../../../assets/img/file.svg'
 
 import {setCurrentDir, pushToStack} from '../../../../../actions/index'
 
-import {Img, FileBox, FileName, FileDate, FileSize} from './fileStyle'
+import {Img, FileBox, FileName, 
+    FileDate, FileSize, BtnBox,} from './fileStyle'
+
+import {ButtonDownload, ButtonDeleted} from '../../../../controls/buttons/btnFile/index'
 
 
 const File  = ({file}) => {
@@ -22,12 +25,20 @@ const File  = ({file}) => {
 
     }
 
+
     return (
         <FileBox onClick={file.type === 'dir' ? () => openDirHandler() : null}>
             <Img src={file.type === 'dir' ? dirLogo : fileLogo}></Img>
             <FileName>{file.name}</FileName>
             <FileDate>{file.date.slice(0, 10)}</FileDate>
             <FileSize>{file.size}</FileSize>
+            {file.type !== 'dir' && 
+                <BtnBox>
+                    <ButtonDownload file={file}></ButtonDownload>
+                    
+                    <ButtonDeleted></ButtonDeleted>
+                </BtnBox>
+            }
         </FileBox>
     )
 }

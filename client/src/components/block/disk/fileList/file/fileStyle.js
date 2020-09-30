@@ -10,7 +10,11 @@ export const FileBox = styled.div`
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.02);
+        transform: scale(1.01);
+    }
+
+    &:hover div{
+        display: block;
     }
 `
 export const Img = styled.img`
@@ -25,4 +29,9 @@ export const FileDate = styled.div`
 `
 export const FileSize = styled.div`
     grid-column-start: 6;
+`
+
+export const BtnBox = styled.div`
+    display: none;
+    grid-column-start: 7;
 `

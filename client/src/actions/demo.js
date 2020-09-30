@@ -112,3 +112,22 @@ export const uploadFile = (file, dirId) => {
         }
     }
 }
+
+export const  downloadFile = async (file) => {
+    const response = await fetch(`http://localhost:5000/api/files/download?id=${file._id}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+
+    if(response.status === 200) {
+        const blob = await response.blob() // Подобный физ файла объект
+        const downloadUrl = window.URL.createObjectURL(blob) // Создаем URL и преобразовываем файл в обычный вид из бинарного
+        const link = document.createElement('a') // Создаем ссылку и делаем имитацию нажатия
+        link.href = downloadUrl
+        link.download = file.name
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+    }
+}

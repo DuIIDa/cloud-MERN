@@ -22,6 +22,19 @@ class FileService {
         }))
     }
 
+    deleteFile(file) {
+        const path = this.getPath(file)
+        console.log('path: ', path);
+        if(file.type === 'dir') {
+            fs.rmdirSync(path)
+        } else {
+            fs.unlinkSync(path)
+        }
+    }
+    getPath(file) {
+        return `${config.get('filePath')}\\${file.user._id}\\${file.path}`
+    }
+
 }
 
 module.exports = new FileService()

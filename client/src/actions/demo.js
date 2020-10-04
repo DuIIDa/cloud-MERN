@@ -1,6 +1,5 @@
 import axios from 'axios'
-import {setUser} from './index'
-import { setFiles, addFile } from './internalization'
+import { setUser, setFiles, addFile, deleteFileAction } from './index'
 
 //USER
 //Указываем куда будет отправляться запрос и что должны получить
@@ -113,7 +112,7 @@ export const uploadFile = (file, dirId) => {
     }
 }
 
-export const  downloadFile = async (file) => {
+export const downloadFile = async (file) => {
     const response = await fetch(`http://localhost:5000/api/files/download?id=${file._id}`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -130,4 +129,22 @@ export const  downloadFile = async (file) => {
         link.click()
         link.remove()
     }
+}
+
+export const deleteFile = (file) => {
+    return async dispatch => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/files/delete?id=${file._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+            })
+
+            dispatch(deleteFileAction(file._id))
+            alert(response.data.message)
+        } catch (error) {
+            alert(error?.response?.data?.message)
+        }
+    }
+
 }

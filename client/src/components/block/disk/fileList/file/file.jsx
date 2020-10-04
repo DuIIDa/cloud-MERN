@@ -31,14 +31,13 @@ const File  = ({file}) => {
             <Img src={file.type === 'dir' ? dirLogo : fileLogo}></Img>
             <FileName>{file.name}</FileName>
             <FileDate>{file.date.slice(0, 10)}</FileDate>
-            <FileSize>{file.size}</FileSize>
-            {file.type !== 'dir' && 
-                <BtnBox>
-                    <ButtonDownload file={file}></ButtonDownload>
+            <FileSize>{file.size}</FileSize> 
+
+            <BtnBox>
+                {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
                     
-                    <ButtonDeleted></ButtonDeleted>
-                </BtnBox>
-            }
+                <ButtonDeleted file={file}></ButtonDeleted>
+            </BtnBox>
         </FileBox>
     )
 }

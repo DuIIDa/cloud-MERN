@@ -16,7 +16,7 @@ export const BtnBack = () => {
     }
 
     return (
-        <Button onClick={() => backHandler()}>
+        <Button onClick={dirStack.length!==0 ? backHandler : null}>
             <img src={arrowBack} alt = 'Back'/>
         </Button>
     )

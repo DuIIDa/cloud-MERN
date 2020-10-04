@@ -8,3 +8,7 @@ export const SET_POPUP_DISPLAY = 'SET_POPUP_DISPLAY' // Для создания 
 export const DELETE_FILE = 'DELETE_FILE' // Для удаления файла
 
 export const PUSH_TO_STACK = 'PUSH_TO_STACK' // Добавление в стек род. папок
+
+export const ADD_UPLOAD_FILE = 'ADD_UPLOAD_FILE' // Добавление в массив загружаемых файлов
+export const REMOVE_UPLOAD_FILE = 'REMOVE_UPLOAD_FILE'// Удаление из массива загружаемых файлов
+export const CHANGE_UPLOAD_FILE = 'CHANGE_UPLOAD_FILE'

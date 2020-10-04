@@ -1,5 +1,12 @@
 import axios from 'axios'
-import { setUser, setFiles, addFile, deleteFileAction } from './index'
+
+import { store } from 'react-notifications-component';
+
+import { setUser, setFiles, addFile, deleteFileAction,
+     addUploadFile, removeUploadFile, changeUploadFile } from './index'
+
+import {notificationProgres, notificationSuccess, 
+    notificationError, defaultNotfication} from '../components/notification/index'
 
 //USER
 //Указываем куда будет отправляться запрос и что должны получить
@@ -10,10 +17,20 @@ export const registration = async (email, password) => {
             password
         })
 
-        alert(response.data.message)
+        store.addNotification({
+            ...notificationSuccess(response.data.message)
+        })
     } catch (error) {
         console.log('error: ', error);
-        alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
         
     }
 }
@@ -29,7 +46,15 @@ export const login = (email, password) => {
             localStorage.setItem('token', response.data.token)
         } catch (error) {
             console.log('error: ', error);
-            alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
 
         }
     }
@@ -46,7 +71,15 @@ export const auth = () => {
             localStorage.setItem('token', response.data.token)
         } catch (error) {
             console.log('error: ', error);
-            alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
             localStorage.removeItem('token')
         }
     }
@@ -61,7 +94,15 @@ export const getFiles = (dirId) => {
             })
             dispatch(setFiles(response.data))
         } catch (error) {
-            alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
         }
     }
 }
@@ -78,7 +119,15 @@ export const createDir = (dirId, name) => {
             })
             dispatch(addFile(response.data))
         } catch (error) {
-            alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
         }
     }
 }
@@ -92,16 +141,40 @@ export const uploadFile = (file, dirId) => {
             if(dirId) {
                 formData.append('parent', dirId )
             }
+    
+            let uploadFile = {name: file.name, progress: 0, id: Date.now()}
+            dispatch(addUploadFile(uploadFile))
+            store.addNotification({
+                ...notificationProgres(uploadFile),
+                onRemoval: (_id, _removedBy) => {
+                    dispatch(removeUploadFile(uploadFile.id))
+                }
+            })
+
+            /*store.addNotification({
+                title: `${uploadFile.name}`,
+                message: (<Progress fileId={uploadFile.id}></Progress>),
+                type: "info",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                onRemoval: (_id, _removedBy) => {
+                    dispatch(removeUploadFile(uploadFile.id))
+                },
+            });*/
+
             const response =  await axios.post(`http://localhost:5000/api/files/upload`, 
             formData,
             {
                 headers:{Authorization:`Bearer ${localStorage.getItem('token')}`},
                 onUploadProgress: progressEvent => {
                     const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
-                    console.log('total', totalLength)
-                    if (totalLength) {
-                        let progress = Math.round((progressEvent.loaded * 100) / totalLength)
-                        console.log(progress)
+                
+
+                    if (totalLength) {                    
+                        uploadFile.progress = Math.round((progressEvent.loaded * 100) / totalLength)
+                        dispatch(changeUploadFile(uploadFile))
                     }
                 }
             })
@@ -141,9 +214,19 @@ export const deleteFile = (file) => {
             })
 
             dispatch(deleteFileAction(file._id))
-            alert(response.data.message)
+            store.addNotification({
+                ...notificationSuccess(response.data.message)
+            })
         } catch (error) {
-            alert(error?.response?.data?.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }          
         }
     }
 

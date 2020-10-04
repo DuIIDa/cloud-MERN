@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch,  useSelector } from 'react-redux';
 
 import { uploadFile } from '../../../../actions';
@@ -12,6 +13,7 @@ export const BtnUploadFile = () => {
         const files = [...event.target.files]
         files.forEach(file => dispatch(uploadFile(file, currentDir.id)))
     }
+
 
     return (
         <DiskUpload>

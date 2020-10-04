@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css/animate.compat.css'
+
 import { ThemeProvider } from 'styled-components'
 import theme from '../theme/theme'
 
@@ -29,6 +33,7 @@ function App() {
 
     return (
         <BrowserRouter>
+        <ReactNotification></ReactNotification>
             <ThemeProvider theme={theme}>
             <GlobalStyle></GlobalStyle>
                 <div className="App">

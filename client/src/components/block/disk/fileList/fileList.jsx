@@ -7,7 +7,7 @@ import {FileListContainer, FileListHeader, FileListName, FileListDate
 
 const FileList  = () => {
 
-    const files = useSelector(state => state.files.files).map(file => <File key={file._id} file={file}></File>)
+    const files = useSelector(state => state.files.files).map(file => <File class='animated' key={file._id} file={file}></File>)
 
     return (
         <FileListContainer>

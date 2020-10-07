@@ -1,8 +1,22 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const rotate = keyframes`
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0);
+    }
+`;
+
 
 export const FileBox = styled.div`
     border-bottom: solid 2px ${props => props.theme.colors.fontColor};
     margin: 10px 0px;
+    animation: ${rotate} 500ms forwards;
 
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);

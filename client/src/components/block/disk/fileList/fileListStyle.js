@@ -23,10 +23,26 @@ export const FileListHeader = styled.div`
 
 export const FileListName = styled.p`
     grid-column-start: 2;
+    cursor: pointer;
+    &:hover {
+        color: #324ab2;
+        text-shadow: 0 0 10px ${props => props.theme.colors.fontColor}, 0 0 50px ${props => props.theme.colors.fontColor};
+    }
 `
 export const FileListDate = styled.p`
     grid-column-start: 5;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    &:hover {
+        color: #324ab2;
+        text-shadow: 0 0 10px ${props => props.theme.colors.fontColor}, 0 0 50px ${props => props.theme.colors.fontColor};
+    }
 `
 export const FileListSize = styled.p`
     grid-column-start: 6;
+    cursor: pointer;
+    &:hover {
+        color: #324ab2;
+        text-shadow: 0 0 10px ${props => props.theme.colors.fontColor}, 0 0 50px ${props => props.theme.colors.fontColor};
+    }
 `

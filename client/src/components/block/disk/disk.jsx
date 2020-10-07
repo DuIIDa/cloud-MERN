@@ -12,6 +12,7 @@ import { Popup } from './popup/Popup';
 const Disk  = () => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state=> state.files.currentDir)
+    
     const [dragEnter,  setDragEnter] = useState(false)
 
     useEffect(() => {

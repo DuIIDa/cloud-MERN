@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 
 import File from './file/file'
 import {FileListContainer, FileListHeader, FileListName, FileListDate
-    ,FileListSize} from './fileListStyle'
+    ,FileListSize, ImgBlock} from './fileListStyle'
+
+import emptyDirPath from '../../../../assets/img/emptyDir.svg'
 
 const FileList  = () => {
 
@@ -33,6 +35,15 @@ const FileList  = () => {
         else if(elemOne > elemTwo)
             return -sort.order
         return 0
+    }
+
+    if(files.length === 0) {
+        return (
+            <ImgBlock>
+                <img src={emptyDirPath} alt='Img not found'></img>
+                <p>Эта папка пуста!</p>
+            </ImgBlock>
+        )
     }
 
     return (

@@ -3,7 +3,8 @@ import axios from 'axios'
 import { store } from 'react-notifications-component';
 
 import { setUser, setFiles, addFile, deleteFileAction,
-     addUploadFile, removeUploadFile, changeUploadFile } from './index'
+     addUploadFile, removeUploadFile, changeUploadFile,
+     showLoader, hideLoader } from './index'
 
 import {notificationProgres, notificationSuccess, 
     notificationError, defaultNotfication} from '../components/notification/index'
@@ -89,6 +90,7 @@ export const auth = () => {
 export const getFiles = (dirId) => {
     return async dispatch => {
         try {
+            dispatch(showLoader())
             const response =  await axios.get(`http://localhost:5000/api/files${dirId ? `?parent=${dirId}` : ''}`, {
                 headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}
             })
@@ -103,6 +105,9 @@ export const getFiles = (dirId) => {
                     ...defaultNotfication('Unknown Error!')
                 })    
             }  
+        }
+        finally {
+            dispatch(hideLoader())
         }
     }
 }
@@ -227,6 +232,33 @@ export const deleteFile = (file) => {
                     ...defaultNotfication('Unknown Error!')
                 })    
             }          
+        }
+    }
+
+}
+
+export const searchFiles = (search) => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/files/search?search=${search}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+            })
+
+            dispatch(setFiles(response.data))
+        } catch (error) {
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }          
+        } finally {
+            dispatch(hideLoader())
         }
     }
 

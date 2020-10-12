@@ -11,4 +11,8 @@ export const PUSH_TO_STACK = 'PUSH_TO_STACK' // Добавление в стек
 
 export const ADD_UPLOAD_FILE = 'ADD_UPLOAD_FILE' // Добавление в массив загружаемых файлов
 export const REMOVE_UPLOAD_FILE = 'REMOVE_UPLOAD_FILE'// Удаление из массива загружаемых файлов
-export const CHANGE_UPLOAD_FILE = 'CHANGE_UPLOAD_FILE'
+export const CHANGE_UPLOAD_FILE = 'CHANGE_UPLOAD_FILE' // Для процентов
+
+export const SHOW_LOADER = 'SHOW_LOADER' // Показать лоадер
+export const HIDE_LOADER = 'HIDE_LOADER' // Убрать
+

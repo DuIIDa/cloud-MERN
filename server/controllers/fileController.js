@@ -8,8 +8,11 @@ class FileController {
     async сreateDir(req, res) {
         try {
             const {name, type, parent} = req.body
+            console.log('req.body: ', req.body);
             const file = new File({name, type, parent, user: req.user.id})
-            const parentFile = await File.findOne({_id: parent})
+            
+            const parentFile = await File.findOne({_id: parent}) 
+            
            
             if(!parentFile) {
                 file.path = name
@@ -124,6 +127,19 @@ class FileController {
         } catch (error) {
             console.log('error: ', error);
             return res.status(400).json({message: 'Deleted this file Error! Dir is not empty!'})
+        }
+    }
+
+    async searchFile(req, res) {
+        try {
+            const searchName = req.query.search
+            let files = await File.find({user: req.user.id})
+
+            files = files.filter(file => file.name.includes(searchName))
+            return res.json(files)
+        } catch (error) {
+            console.log('error: ', error);
+            return res.status(500).json({message: 'search error!'})
         }
     }
 

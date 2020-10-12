@@ -16,7 +16,7 @@ export const Popup = () => {
     const dispatch = useDispatch()
 
     const createDirHendler = () => {
-        dispatch(createDir(currentDir.path, dirName))
+        dispatch(createDir(currentDir.id, dirName))
         setDirName('')
         dispatch(setPopupDisplay('none'))
     }

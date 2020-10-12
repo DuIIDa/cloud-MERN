@@ -9,10 +9,14 @@ import {BtnBack, BtnCreateDir, BtnUploadFile} from '../../controls/buttons/btnDi
 import FileLIst from './fileList/fileList'
 import { Popup } from './popup/Popup';
 
+import {Loader} from '../../loader/loader'
+
+
 const Disk  = () => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state=> state.files.currentDir)
-    
+    const loader = useSelector(state=> state.app.loader)
+
     const [dragEnter,  setDragEnter] = useState(false)
 
     useEffect(() => {
@@ -36,6 +40,11 @@ const Disk  = () => {
         files.forEach(file => dispatch(uploadFile(file, currentDir.id)))
     }
 
+    if(loader) {
+        return (
+            <Loader></Loader>
+        )
+    }
 
     return ( !dragEnter ?
         <div onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>

@@ -14,7 +14,7 @@ export const NavbarBlock = styled.div`
     align-items: center;
     padding: 8px 50px 8px 50px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 775px) {
         flex-direction: column;
     }
 `
@@ -30,6 +30,7 @@ export const ContentBlock = styled.div`
 
     @media (max-width: 400px) {
         flex-wrap: wrap;
+        margin-bottom: 15px;
     }
 
 `

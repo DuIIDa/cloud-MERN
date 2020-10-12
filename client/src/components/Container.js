@@ -6,4 +6,8 @@ export const Container = styled.div`
     min-width: 345px;
     padding: 10px 80px;
     background: ${props => props.theme.colors.bgTwoColors};
+
+    @media (max-width: 500px) {
+        padding: 10px 15px;
+    }
 `

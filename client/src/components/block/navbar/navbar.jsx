@@ -5,6 +5,7 @@ import Logo from '../../../assets/img/navbar-logo.svg'
 import {NavbarContainer, NavbarBlock, ContentBlock, Img} from './navbarStyle'
 import Button from '../../controls/buttons/buttonsNavbar/button'
 import ButtonBack from '../../controls/buttons/buttonsNavbar/buttonBack'
+import {Input} from '../../controls/inputs/inputSearch/input'
 
 import {logout} from '../../../actions/index'
 
@@ -18,6 +19,7 @@ const Navbar = () => {
                 <ContentBlock>
                     <Img src={Logo} alt="Logo"></Img>
                     <h3>MERN CLOUD</h3>
+                    {isAuth && <Input></Input>}
                 </ContentBlock>
 
                 <ContentBlock>

@@ -46,3 +46,10 @@ export const FileListSize = styled.p`
         text-shadow: 0 0 10px ${props => props.theme.colors.fontColor}, 0 0 50px ${props => props.theme.colors.fontColor};
     }
 `
+
+export const ImgBlock = styled.div`
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+`

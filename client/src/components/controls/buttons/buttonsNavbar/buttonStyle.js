@@ -40,7 +40,7 @@ export const ButtonStyle = styled.button`
         }
     }
 
-    &:first-child {
+    &:not(:last-child) {
         margin-right: 27px;
         width: 120px;
     }

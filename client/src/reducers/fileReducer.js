@@ -1,6 +1,6 @@
 import {SET_FILES, SET_СURRENT_DIR, 
     ADD_FILE, SET_POPUP_DISPLAY, 
-    PUSH_TO_STACK, DELETE_FILE} from '../constants/index'
+    PUSH_TO_STACK, DELETE_FILE, SET_VIEW} from '../constants/index'
 
 const initialState = {
     files: [],
@@ -9,7 +9,8 @@ const initialState = {
         path: null,
     },
     popupDisplay: 'none',
-    dirStack: []
+    dirStack: [],
+    view: 'list'
 }
 
 export default function fileReducer(state = initialState, action) {
@@ -20,6 +21,7 @@ export default function fileReducer(state = initialState, action) {
         case SET_POPUP_DISPLAY: return {...state, popupDisplay: action.payload}
         case PUSH_TO_STACK: return {...state, dirStack: [...state.dirStack, action.payload]}
         case DELETE_FILE: return {...state, files: [...state.files.filter(file => file._id !== action.payload)]}
+        case SET_VIEW: return {...state, view: action.payload}
 
         default:
             return state

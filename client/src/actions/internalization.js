@@ -2,7 +2,7 @@ import {SET_USER, LOGOUT, SET_FILES,
     SET_СURRENT_DIR, ADD_FILE, SET_POPUP_DISPLAY, 
     PUSH_TO_STACK, DELETE_FILE,
     ADD_UPLOAD_FILE, REMOVE_UPLOAD_FILE, CHANGE_UPLOAD_FILE,
-    SHOW_LOADER, HIDE_LOADER} from '../constants/index'
+    SHOW_LOADER, HIDE_LOADER, SET_VIEW} from '../constants/index'
 
 // USER
 export const setUser = user => ({type: SET_USER, payload: user})
@@ -25,3 +25,6 @@ export const changeUploadFile = payload => ({type: CHANGE_UPLOAD_FILE, payload: 
 
 export const showLoader = () =>({type: SHOW_LOADER})
 export const hideLoader = () =>({type: HIDE_LOADER})
+
+// GRID
+export const setView = payload => ({type: SET_VIEW, payload})

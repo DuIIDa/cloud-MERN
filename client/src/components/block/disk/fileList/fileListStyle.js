@@ -53,3 +53,12 @@ export const ImgBlock = styled.div`
     margin: 0 auto;
     text-align: center;
 `
+
+
+// PLATE
+
+export const FilePlateContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0px;
+`

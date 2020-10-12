@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getFiles, uploadFile} from '../../../actions'
 
 import {DiskHeadContainer, Title, BtnBlock, DropAria} from './diskStyle'
-import {BtnBack, BtnCreateDir, BtnUploadFile} from '../../controls/buttons/btnDisk/index'
+import {BtnBack, BtnCreateDir, BtnUploadFile, 
+    BtnPlateGrid, BtnListGrid} from '../../controls/buttons/btnDisk/index'
 
 import FileLIst from './fileList/fileList'
 import { Popup } from './popup/Popup';
@@ -50,14 +51,19 @@ const Disk  = () => {
         <div onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
             <Title>{currentDir.id ? currentDir.path : 'Главная страница'}</Title>
             <DiskHeadContainer>
-                
-                <BtnBlock>
-                    <BtnBack></BtnBack>
-                    <BtnCreateDir></BtnCreateDir>
-                </BtnBlock>
+                <div className = 'test'>
+                    <BtnBlock>
+                        <BtnBack></BtnBack>
+                        <BtnCreateDir></BtnCreateDir>
+                    </BtnBlock>
 
-                <BtnBlock>
-                    <BtnUploadFile></BtnUploadFile>
+                    <BtnBlock>
+                        <BtnUploadFile></BtnUploadFile>
+                    </BtnBlock>
+                </div>
+                <BtnBlock className='btn-grid'>
+                    <BtnPlateGrid></BtnPlateGrid>
+                    <BtnListGrid></BtnListGrid>
                 </BtnBlock>
 
             </DiskHeadContainer>

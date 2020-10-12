@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import File from './file/file'
 import {FileListContainer, FileListHeader, FileListName, FileListDate
-    ,FileListSize, ImgBlock} from './fileListStyle'
+    ,FileListSize, ImgBlock, FilePlateContainer} from './fileListStyle'
 
 import emptyDirPath from '../../../../assets/img/emptyDir.svg'
 
@@ -14,15 +14,26 @@ const FileList  = () => {
         order: -1
     })
     const files = useSelector(state => state.files.files)
-    
+    const fileView = useSelector(state => state.files.view)
+
+    // СОРТИРОВКА
     const sorting = (direction) => {
-        setSort({
-            ...sort,
-            direction: direction,
-            order: -sort.order
-        })
+        if(sort.direction !== direction) {
+            setSort({
+                ...sort,
+                direction: direction,
+                order: -1
+            })
+        }else {
+            setSort({
+                ...sort,
+                direction: direction,
+                order: -sort.order
+            })
+        }
     }
 
+    // ФУНКЦИЯ ПРИ СОРИТРОВКЕ
     const compare = (a, b) => {
         let elemOne = a[sort.direction]
         let elemTwo = b[sort.direction]
@@ -37,6 +48,7 @@ const FileList  = () => {
         return 0
     }
 
+    // ЕСЛИ ПАПКА ПУСТА
     if(files.length === 0) {
         return (
             <ImgBlock>
@@ -46,26 +58,46 @@ const FileList  = () => {
         )
     }
 
-    return (
-        <FileListContainer>
-            <FileListHeader>
-                <FileListName onClick={() => sorting('name')}>Название</FileListName>
-                <FileListDate onClick={() => sorting('date')}>Дата</FileListDate>
-                <FileListSize onClick={() => sorting('size')}>Размер</FileListSize>
-            </FileListHeader>
+    // ВЫВОД ФАЙЛОВ В РАЗНЫХ СЕТКАХ
+    if(fileView === 'list') {
+        return (
+            <FileListContainer>
+                <FileListHeader>
+                    <FileListName onClick={() => sorting('name')}>Название</FileListName>
+                    <FileListDate onClick={() => sorting('date')}>Дата</FileListDate>
+                    <FileListSize onClick={() => sorting('size')}>Размер</FileListSize>
+                </FileListHeader>
+    
+                    {
+                        files.filter(file => file.type === 'dir')
+                            .sort(compare)
+                            .map(file => <File key={file._id} file={file}></File>)
+                    }
+                    {
+                        files.filter(file => file.type !== 'dir')
+                            .sort(compare)
+                            .map(file => <File key={file._id} file={file}></File>)
+                    }
+            </FileListContainer>
+        )
+    } else if(fileView === 'plate'){
+        return (
+            <FilePlateContainer>
+                    {
+                        files.filter(file => file.type === 'dir')
+                            .sort(compare)
+                            .map(file => <File key={file._id} file={file}></File>)
+                    }
+                    {
+                        files.filter(file => file.type !== 'dir')
+                            .sort(compare)
+                            .map(file => <File key={file._id} file={file}></File>)
+                    }
+            </FilePlateContainer>
+        )
+    }
 
-                {
-                    files.filter(file => file.type === 'dir')
-                        .sort(compare)
-                        .map(file => <File key={file._id} file={file}></File>)
-                }
-                {
-                    files.filter(file => file.type !== 'dir')
-                        .sort(compare)
-                        .map(file => <File key={file._id} file={file}></File>)
-                }
-        </FileListContainer>
-    )
+    
 }
 
 export default FileList

@@ -3,8 +3,21 @@ import styled from 'styled-components'
 export const DiskHeadContainer = styled.div`
     display: flex;
     align-items: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
 
     margin-bottom: 25px;
+
+    & > .test {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: row; 
+
+        @media (max-width: 660px) {
+            flex-direction: column; 
+            align-items: flex-start;
+        }
+    }
 `
 export const Title = styled.h3`
     text-align: center;
@@ -15,11 +28,15 @@ export const Title = styled.h3`
 export const BtnBlock = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     margin-bottom: 15px;
 
     &:not(:last-child) {
         margin-right: 15px;
+    }
+
+    &.btn-grid {
+        flex-direction: row;
     }
 `
 

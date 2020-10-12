@@ -6,8 +6,9 @@ import fileLogo from '../../../../../assets/img/file.svg'
 
 import {setCurrentDir, pushToStack} from '../../../../../actions/index'
 
-import {Img, FileBox, FileName, 
-    FileDate, FileSize, BtnBox,} from './fileStyle'
+import {ImgList, FileBoxList, FileNameList, 
+    FileDate, FileSize, BtnBox,
+    FileBoxPlate, ImgPlate, FileNamePlate} from './fileStyle'
 
 import {ButtonDownload, ButtonDeleted} from '../../../../controls/buttons/btnFile/index'
 
@@ -16,6 +17,7 @@ import formatSize from './fileFormat'
 const File  = ({file}) => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state => state.files.currentDir)
+    const fileView = useSelector(state => state.files.view)
 
     const openDirHandler = () => {
         dispatch(pushToStack(currentDir))
@@ -26,21 +28,36 @@ const File  = ({file}) => {
 
     }
 
-
-    return (
-        <FileBox onClick={file.type === 'dir' ? () => openDirHandler() : null}>
-            <Img src={file.type === 'dir' ? dirLogo : fileLogo}></Img>
-            <FileName>{file.name}</FileName>
-            <FileDate>{file.date.slice(0, 10)}</FileDate>
-            <FileSize>{formatSize(file.size)}</FileSize> 
-
-            <BtnBox>
-                {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
-                    
-                <ButtonDeleted file={file}></ButtonDeleted>
-            </BtnBox>
-        </FileBox>
-    )
+    // ПОКАЗ ФАЙЛОВ
+    if(fileView === 'list') {
+        return (
+            <FileBoxList onClick={file.type === 'dir' ? () => openDirHandler() : null}>
+                <ImgList src={file.type === 'dir' ? dirLogo : fileLogo}></ImgList>
+                <FileNameList>{file.name}</FileNameList>
+                <FileDate>{file.date.slice(0, 10)}</FileDate>
+                <FileSize>{formatSize(file.size)}</FileSize> 
+    
+                <BtnBox>
+                    {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
+                        
+                    <ButtonDeleted file={file}></ButtonDeleted>
+                </BtnBox>
+            </FileBoxList>
+        )
+    } else if(fileView === 'plate') {
+        return (
+            <FileBoxPlate onClick={file.type === 'dir' ? () => openDirHandler() : null}>
+                <ImgPlate src={file.type === 'dir' ? dirLogo : fileLogo}></ImgPlate>
+                <FileNamePlate>{file.name}</FileNamePlate>
+    
+                <BtnBox>
+                    {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
+                        
+                    <ButtonDeleted file={file}></ButtonDeleted>
+                </BtnBox>
+            </FileBoxPlate>
+        )
+    }
 }
 
 export default File

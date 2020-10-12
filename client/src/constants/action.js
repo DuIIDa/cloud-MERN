@@ -16,3 +16,4 @@ export const CHANGE_UPLOAD_FILE = 'CHANGE_UPLOAD_FILE' // Для процент�
 export const SHOW_LOADER = 'SHOW_LOADER' // Показать лоадер
 export const HIDE_LOADER = 'HIDE_LOADER' // Убрать
 
+export const SET_VIEW = 'SIT_VIEW' // Различное представление файлов

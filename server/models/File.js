@@ -1,5 +1,5 @@
 const {model, Schema, ObjectId} = require('mongoose')
-
+// Создает колекцию по имени модели
 
 const File = new Schema({
     name: {type: String, required: true},

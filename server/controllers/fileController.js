@@ -8,7 +8,7 @@ class FileController {
     async сreateDir(req, res) {
         try {
             const {name, type, parent} = req.body
-            console.log('req.body: ', req.body);
+            
             const file = new File({name, type, parent, user: req.user.id})
             
             const parentFile = await File.findOne({_id: parent}) 

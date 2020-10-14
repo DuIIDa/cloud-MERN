@@ -1,13 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+
 import {ButtonStyle} from './buttonStyle'
 
-const ButtonBack = (props) => {
+import {logout} from '../../../../actions/index'
+
+export const ButtonBack = () => {
     const dispatch = useDispatch()
 
     return (
-        <ButtonStyle onClick={() => dispatch(props.logOut())}>{props.text}</ButtonStyle>
+        <ButtonStyle className='back' onClick={() => dispatch(logout())}>Выход</ButtonStyle>
     )
 }
-
-export default ButtonBack

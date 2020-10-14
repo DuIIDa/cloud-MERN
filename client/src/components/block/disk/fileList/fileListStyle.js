@@ -56,7 +56,6 @@ export const ImgBlock = styled.div`
 
 
 // PLATE
-
 export const FilePlateContainer = styled.div`
     display: flex;
     flex-wrap: wrap;

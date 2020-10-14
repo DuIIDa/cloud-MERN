@@ -55,7 +55,6 @@ export const BtnBox = styled.div`
 
 
 // PLATE
-
 export const FileBoxPlate = styled.div`
     width: 150px;
     height: 150px;

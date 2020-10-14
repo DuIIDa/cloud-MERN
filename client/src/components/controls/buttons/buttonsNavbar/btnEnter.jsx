@@ -2,10 +2,8 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {ButtonStyle} from './buttonStyle'
 
-const Button = (props) => {
+export const ButtonEnter = () => {
     return (
-        <ButtonStyle><NavLink to={props.to}>{props.text}</NavLink></ButtonStyle>
+        <ButtonStyle className='enter'><NavLink to='/login'>Войти</NavLink></ButtonStyle>
     )
 }
-
-export default Button

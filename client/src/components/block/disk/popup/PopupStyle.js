@@ -1,4 +1,16 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const rotate = keyframes`
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0);
+    }
+`;
 
 export const PopupBlock = styled.div`
     width: 100%;
@@ -12,6 +24,7 @@ export const PopupBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
 `
 
 export const PopupContent = styled.div`
@@ -21,6 +34,8 @@ export const PopupContent = styled.div`
     background: ${props => props.theme.colors.write};  
     padding: 20px;
     border-radius: 12px;
+    
+    animation: ${rotate} 500ms forwards;
 `
 
 export const PopupHeader = styled.div`

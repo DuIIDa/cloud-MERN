@@ -10,11 +10,18 @@ export const ButtonStyle = styled.button`
     font-size: 18px;
     font-weight : bold;
     padding: 5px 0px;
-    width: 180px;
     border-radius: 9px;
     border: 1px solid black;
     overflow: hidden;
     transition: all 500ms ease;
+
+    &.registration {
+        width: 180px;
+    }
+    &.enter, &.back{
+        width: 120px;
+    }
+
     
     &:before {
         content: "${'\\2794'}";
@@ -42,7 +49,6 @@ export const ButtonStyle = styled.button`
 
     &:not(:last-child) {
         margin-right: 27px;
-        width: 120px;
     }
 
     > a {
@@ -52,5 +58,11 @@ export const ButtonStyle = styled.button`
 
     @media (max-width: 400px) {
         margin-bottom: 10px;
+    }
+
+    @media (max-width: 640px) {
+        &.enter {
+            margin-bottom: 10px;
+        }
     }
 `

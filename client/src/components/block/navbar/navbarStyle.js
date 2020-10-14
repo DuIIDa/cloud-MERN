@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const NavbarContainer = styled.div`
     background: ${props => props.theme.colors.write};
     box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
-    min-width: 345px;
+    min-width: 400px;
 `
 
 export const NavbarBlock = styled.div`
@@ -11,30 +11,55 @@ export const NavbarBlock = styled.div`
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 8px 50px 8px 50px;
 
-    @media (max-width: 775px) {
-        flex-direction: column;
-    }
 `
-
+            
 export const ContentBlock = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 600px) {
-        margin-bottom: 30px;
+    @media (max-width: 775px) {
+        margin-bottom: 15px;
+
+        &.box-logo {
+            flex-direction: column;
+            
+        }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 640px) {
         flex-wrap: wrap;
-        margin-bottom: 15px;
+
+        &.box-btn {
+            align-items: flex-end;
+            flex-direction: column;
+        }
     }
 
 `
 
-export const Img = styled.img`
-    margin-right: 16px
+export const ImgLogo = styled.img`
+    width: 70px;
+    height: 70px;
+    margin-right: 16px;
+`
+
+export const NameUser = styled.h3`
+    max-width: 230px;
+    margin-right: 10px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+    @media (max-width: 640px) {
+        max-width: 140px;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 400px) {
+        max-width: 120px;
+    }
 `

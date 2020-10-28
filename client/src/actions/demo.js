@@ -39,7 +39,7 @@ export const registration = (email, password) => {
    }
 }
 
-export const login = (email, password) => {
+export const login = (email, password, staySystem = false) => {
     return async dispatch => {
         try {
             const response = await axios.post('http://192.168.43.24:5000/api/auth/login', {
@@ -47,7 +47,12 @@ export const login = (email, password) => {
                 password
             })
             dispatch(setUser(response.data.user))
-            localStorage.setItem('token', response.data.token)
+            
+            if(staySystem)
+                localStorage.setItem('token', response.data.token)
+            else  
+                sessionStorage.setItem('token', response.data.token)
+            
         } catch (error) {
             console.log('error: ', error);
             if(error.response) {
@@ -67,12 +72,16 @@ export const login = (email, password) => {
 export const auth = () => {
     return async dispatch => {
         try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response = await axios.get('http://192.168.43.24:5000/api/auth/auth', 
-            {headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
+            {headers:{Authorization:`Bearer ${token}`}}
             )
 
             dispatch(setUser(response.data.user))
-            localStorage.setItem('token', response.data.token)
+            debugger
+            localStorage.getItem('token') && localStorage.setItem('token', response.data.token)
+            sessionStorage.getItem('token') && sessionStorage.setItem('token', response.data.token)
+
         } catch (error) {
             console.log('error: ', error);
             if(error.response) {
@@ -94,8 +103,9 @@ export const getFiles = (dirId) => {
     return async dispatch => {
         try {
             dispatch(showLoader())
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response =  await axios.get(`http://192.168.43.24:5000/api/files${dirId ? `?parent=${dirId}` : ''}`, {
-                headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}
+                headers:{Authorization:`Bearer ${token}`}
             })
             dispatch(setFiles(response.data))
         } catch (error) {
@@ -118,12 +128,13 @@ export const getFiles = (dirId) => {
 export const createDir = (dirId, name) => {
     return async dispatch => {
         try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response =  await axios.post(`http://192.168.43.24:5000/api/files`,{
                 name, 
                 type: 'dir', 
                 parent: dirId
             }, {
-                headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}
+                headers:{Authorization:`Bearer ${token}`}
             })
             dispatch(addFile(response.data))
         } catch (error) {
@@ -143,6 +154,7 @@ export const createDir = (dirId, name) => {
 export const uploadFile = (file, dirId) => {
     return async dispatch => {
         try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const formData = new FormData()
             formData.append('file', file)
 
@@ -164,7 +176,7 @@ export const uploadFile = (file, dirId) => {
             const response =  await axios.post(`http://192.168.43.24:5000/api/files/upload`, 
             formData,
             {
-                headers:{Authorization:`Bearer ${localStorage.getItem('token')}`},
+                headers:{Authorization:`Bearer ${token}`},
                 onUploadProgress: progressEvent => {
                     const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
                 
@@ -197,9 +209,10 @@ export const uploadFile = (file, dirId) => {
 }
 
 export const downloadFile = async (file) => {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token')
     const response = await fetch(`http://192.168.43.24:5000/api/files/download?id=${file._id}`,{
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${token}`
         }
     })
 
@@ -218,9 +231,10 @@ export const downloadFile = async (file) => {
 export const deleteFile = (file) => {
     return async dispatch => {
         try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response = await axios.delete(`http://192.168.43.24:5000/api/files/delete?id=${file._id}`, {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                        Authorization: `Bearer ${token}`
                     }
             })
 
@@ -246,9 +260,10 @@ export const deleteFile = (file) => {
 export const searchFiles = (search) => {
     return async dispatch => {
         try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response = await axios.get(`http://192.168.43.24:5000/api/files/search?search=${search}`, {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                        Authorization: `Bearer ${token}`
                     }
             })
 

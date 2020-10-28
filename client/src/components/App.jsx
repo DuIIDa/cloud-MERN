@@ -28,7 +28,8 @@ function App() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        localStorage.getItem('token') && dispatch(auth())
+        (localStorage.getItem('token') || sessionStorage.getItem('token')) && dispatch(auth())
+
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

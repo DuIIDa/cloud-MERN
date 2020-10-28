@@ -4,11 +4,11 @@ import {login} from '../../../../actions/index'
 
 import {ButtonStyle} from './buttonStyle'
 
-const Button = (props) => {
+const Button = ({email, password, staySystem}) => {
     const dispatch = useDispatch();
 
     return (
-        <ButtonStyle onClick={() => dispatch(login(props.email, props.password))}>Вход</ButtonStyle>
+        <ButtonStyle onClick={() => dispatch(login(email, password, staySystem))}>Вход</ButtonStyle>
     )
 }
 

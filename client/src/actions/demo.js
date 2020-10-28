@@ -14,7 +14,7 @@ import {notificationProgres, notificationSuccess,
 export const registration = (email, password) => {
    return async dispatch => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/registration', {
+            const response = await axios.post('http://192.168.43.24:5000/api/auth/registration', {
                 email,
                 password
             })
@@ -42,7 +42,7 @@ export const registration = (email, password) => {
 export const login = (email, password) => {
     return async dispatch => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
+            const response = await axios.post('http://192.168.43.24:5000/api/auth/login', {
                 email,
                 password
             })
@@ -67,7 +67,7 @@ export const login = (email, password) => {
 export const auth = () => {
     return async dispatch => {
         try {
-            const response = await axios.get('http://localhost:5000/api/auth/auth', 
+            const response = await axios.get('http://192.168.43.24:5000/api/auth/auth', 
             {headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
             )
 
@@ -94,7 +94,7 @@ export const getFiles = (dirId) => {
     return async dispatch => {
         try {
             dispatch(showLoader())
-            const response =  await axios.get(`http://localhost:5000/api/files${dirId ? `?parent=${dirId}` : ''}`, {
+            const response =  await axios.get(`http://192.168.43.24:5000/api/files${dirId ? `?parent=${dirId}` : ''}`, {
                 headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}
             })
             dispatch(setFiles(response.data))
@@ -118,7 +118,7 @@ export const getFiles = (dirId) => {
 export const createDir = (dirId, name) => {
     return async dispatch => {
         try {
-            const response =  await axios.post(`http://localhost:5000/api/files`,{
+            const response =  await axios.post(`http://192.168.43.24:5000/api/files`,{
                 name, 
                 type: 'dir', 
                 parent: dirId
@@ -152,27 +152,16 @@ export const uploadFile = (file, dirId) => {
     
             let uploadFile = {name: file.name, progress: 0, id: Date.now()}
             dispatch(addUploadFile(uploadFile))
+
             store.addNotification({
+                id: uploadFile.id,
                 ...notificationProgres(uploadFile),
                 onRemoval: (_id, _removedBy) => {
                     dispatch(removeUploadFile(uploadFile.id))
                 }
             })
 
-            /*store.addNotification({
-                title: `${uploadFile.name}`,
-                message: (<Progress fileId={uploadFile.id}></Progress>),
-                type: "info",
-                insert: "top",
-                container: "top-right",
-                animationIn: ["animated", "fadeIn"],
-                animationOut: ["animated", "fadeOut"],
-                onRemoval: (_id, _removedBy) => {
-                    dispatch(removeUploadFile(uploadFile.id))
-                },
-            });*/
-
-            const response =  await axios.post(`http://localhost:5000/api/files/upload`, 
+            const response =  await axios.post(`http://192.168.43.24:5000/api/files/upload`, 
             formData,
             {
                 headers:{Authorization:`Bearer ${localStorage.getItem('token')}`},
@@ -186,15 +175,29 @@ export const uploadFile = (file, dirId) => {
                     }
                 }
             })
+
             dispatch(addFile(response.data))
+
+            setTimeout(() => {
+                store.removeNotification(uploadFile.id)
+            }, 2000);
+
         } catch (error) {
-            alert(error.response.data.message)
+            if(error.response) {
+                store.addNotification({
+                    ...notificationError(error.response.data.message)
+                })
+            } else {
+                store.addNotification({
+                    ...defaultNotfication('Unknown Error!')
+                })    
+            }  
         }
     }
 }
 
 export const downloadFile = async (file) => {
-    const response = await fetch(`http://localhost:5000/api/files/download?id=${file._id}`,{
+    const response = await fetch(`http://192.168.43.24:5000/api/files/download?id=${file._id}`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -215,7 +218,7 @@ export const downloadFile = async (file) => {
 export const deleteFile = (file) => {
     return async dispatch => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/files/delete?id=${file._id}`, {
+            const response = await axios.delete(`http://192.168.43.24:5000/api/files/delete?id=${file._id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -243,7 +246,7 @@ export const deleteFile = (file) => {
 export const searchFiles = (search) => {
     return async dispatch => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/files/search?search=${search}`, {
+            const response = await axios.get(`http://192.168.43.24:5000/api/files/search?search=${search}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }

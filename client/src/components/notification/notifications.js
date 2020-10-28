@@ -7,7 +7,7 @@ const options = {
     animationIn: ["animated", "fadeIn"],
     animationOut: ["animated", "fadeOut"],
     dismiss: {
-        duration: 5000,
+        duration: 3000,
         onScreen: true
     }  
 };
@@ -34,13 +34,16 @@ export const notificationSuccess = (message) => ({
 })
 
 
-export const notificationProgres = (uploadFile) => ({
-    ...options,
-    title: uploadFile.name,
-    message: (<Progress fileId={uploadFile.id}></Progress>),
-    type: "info",
-    container: "top-right",
-    dismiss: {
-        duration: 0
+export const notificationProgres = (uploadFile) => {
+    
+    return {
+        ...options,
+        title: uploadFile.name,
+        message: (<Progress fileId={uploadFile.id}></Progress>),
+        type: "info",
+        container: "top-right",
+        dismiss: {
+            duration: 0
+        }
     }
-})
+}

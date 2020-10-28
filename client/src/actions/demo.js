@@ -11,29 +11,32 @@ import {notificationProgres, notificationSuccess,
 
 //USER
 //Указываем куда будет отправляться запрос и что должны получить
-export const registration = async (email, password) => {
-    try {
-        const response = await axios.post('http://localhost:5000/api/auth/registration', {
-            email,
-            password
-        })
+export const registration = (email, password) => {
+   return async dispatch => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/registration', {
+                email,
+                password
+            })
 
-        store.addNotification({
-            ...notificationSuccess(response.data.message)
-        })
-    } catch (error) {
-        console.log('error: ', error);
-            if(error.response) {
-                store.addNotification({
-                    ...notificationError(error.response.data.message)
-                })
-            } else {
-                store.addNotification({
-                    ...defaultNotfication('Unknown Error!')
-                })    
-            }  
-        
-    }
+            store.addNotification({
+                ...notificationSuccess(response.data.message)
+            })
+            dispatch(login(email, password))
+        } catch (error) {
+            console.log('error: ', error);
+                if(error.response) {
+                    store.addNotification({
+                        ...notificationError(error.response.data.message)
+                    })
+                } else {
+                    store.addNotification({
+                        ...defaultNotfication('Unknown Error!')
+                    })    
+                }  
+            
+        }
+   }
 }
 
 export const login = (email, password) => {

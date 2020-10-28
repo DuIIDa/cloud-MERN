@@ -6,13 +6,13 @@ import fileLogo from '../../../../../assets/img/file.svg'
 
 import {setCurrentDir, pushToStack} from '../../../../../actions/index'
 
-import {ImgList, FileBoxList, FileNameList, 
-    FileDate, FileSize, BtnBox,
-    FileBoxPlate, ImgPlate, FileNamePlate} from './fileStyle'
+import {ImgList, FileBoxList, 
+    FileDate, FileSize,
+    FileBoxPlate, ImgPlate, NameBlock} from './fileStyle'
 
 import {ButtonDownload, ButtonDeleted} from '../../../../controls/buttons/btnFile/index'
 
-import formatSize from './fileFormat'
+import {formatSize, fileNameFormat} from './fileFormat'
 
 const File  = ({file}) => {
     const dispatch = useDispatch()
@@ -28,33 +28,47 @@ const File  = ({file}) => {
 
     }
 
+
+    const fileName = fileNameFormat(file.name)
+
     // ПОКАЗ ФАЙЛОВ
     if(fileView === 'list') {
         return (
             <FileBoxList onClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgList src={file.type === 'dir' ? dirLogo : fileLogo}></ImgList>
-                <FileNameList>{file.name}</FileNameList>
+                <NameBlock className='list'>
+                        {fileName.name}{fileName.format}
+                </NameBlock>
+            
                 <FileDate>{file.date.slice(0, 10)}</FileDate>
-                <FileSize>{formatSize(file.size)}</FileSize> 
+                {file.type !== 'dir' && <FileSize>{formatSize(file.size)}</FileSize>}
     
-                <BtnBox>
+                <div className='box-list-button'>
                     {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
                         
                     <ButtonDeleted file={file}></ButtonDeleted>
-                </BtnBox>
+                </div>
             </FileBoxList>
         )
     } else if(fileView === 'plate') {
         return (
             <FileBoxPlate onClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgPlate src={file.type === 'dir' ? dirLogo : fileLogo}></ImgPlate>
-                <FileNamePlate>{file.name}</FileNamePlate>
-    
-                <BtnBox>
+                <NameBlock className='plate'>
+                    <p className = 'file-name-plate'>
+                        {fileName.name} 
+                    </p>
+                    <p>
+                        {fileName.format}
+                    </p>
+                </NameBlock>
+                
+                
+                <div className='box-plate-button'>
                     {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
                         
                     <ButtonDeleted file={file}></ButtonDeleted>
-                </BtnBox>
+                </div>
             </FileBoxPlate>
         )
     }

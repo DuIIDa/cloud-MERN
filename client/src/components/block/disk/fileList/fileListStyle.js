@@ -37,9 +37,14 @@ export const FileListDate = styled.p`
         color: #324ab2;
         text-shadow: 0 0 10px ${props => props.theme.colors.fontColor}, 0 0 50px ${props => props.theme.colors.fontColor};
     }
+
+    @media (max-width: 600px) {
+        grid-column-start: 4;
+    }
 `
 export const FileListSize = styled.p`
     grid-column-start: 6;
+    justify-self: end;
     cursor: pointer;
     &:hover {
         color: #324ab2;
@@ -60,4 +65,7 @@ export const FilePlateContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0px;
+    align-items: center;
+    justify-content: center;
+
 `

@@ -6,7 +6,7 @@ import {Container} from '../../Container'
 
 import {FormBlock, Title} from './registrationStyle'
 
-import {registration} from '../../../actions/index'
+
 
 const Registration = () => {
     const [email, setEmail] = useState('')
@@ -19,7 +19,7 @@ const Registration = () => {
                 <Input value={email} setValue={setEmail} placeholder='Email' type='text'></Input>
                 <Input value={password} setValue={setPassword} placeholder='Password' type='password'></Input>
                 <div>
-                    <ButtonReg text='Регистрация' email={email} password={password} actionFunc={registration}></ButtonReg>
+                    <ButtonReg email={email} password={password}></ButtonReg>
                 </div>
             </FormBlock>      
         </Container>

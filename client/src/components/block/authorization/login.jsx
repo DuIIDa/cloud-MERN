@@ -6,7 +6,6 @@ import {Container} from '../../Container'
 
 import {FormBlock, Title} from './loginStyle'
 
-import {login} from '../../../actions/index'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -19,7 +18,7 @@ const Login = () => {
                 <Input value={email} setValue={setEmail} placeholder='Email' type='text'></Input>
                 <Input value={password} setValue={setPassword} placeholder='Password' type='password'></Input>
                 <div>
-                    <ButtonLog text='Войти' email={email} password={password} actionFunc={login}></ButtonLog>
+                    <ButtonLog email={email} password={password}></ButtonLog>
                 </div>
             </FormBlock>      
         </Container>

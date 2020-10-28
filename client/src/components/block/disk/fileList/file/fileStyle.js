@@ -23,11 +23,16 @@ export const FileBoxList = styled.div`
     align-items: center;
     cursor: pointer;
 
+    & > .box-list-button {
+        display: none;
+        grid-column-start: 7;
+    }
+
     &:hover {
         transform: scale(1.01);
     }
 
-    &:hover div{
+    &:hover > .box-list-button{
         display: block;
     }
 `
@@ -35,23 +40,18 @@ export const ImgList = styled.img`
     justify-self: center;
 `
 
-export const FileNameList = styled.div`
-    grid-column-start: 2;
-    overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-`
 export const FileDate = styled.div`
     grid-column-start: 5;
+    @media (max-width: 600px) {
+        grid-column-start: 4;
+    }
 `
 export const FileSize = styled.div`
     grid-column-start: 6;
+    justify-self: end;
+    margin-right: 10px;
 `
 
-export const BtnBox = styled.div`
-    display: none;
-    grid-column-start: 7;
-`
 
 
 // PLATE
@@ -63,22 +63,41 @@ export const FileBoxPlate = styled.div`
     flex-direction: column;
     align-items: center;
 
+    & > .box-plate-button {
+        display: none;
+    }
+
     &:hover {
         transform: scale(1.01);
     }
 
-    &:hover div{
+    &:hover > .box-plate-button{
         display: block;
     }
+
 `
 export const ImgPlate = styled.img`
     height: 100px;
     width: 100px;
 `
-export const FileNamePlate = styled.div`
-    width: 100px;
-    overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-    text-align: center;
+
+export const NameBlock = styled.div`
+
+    &.list {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &.plate {
+        display: flex;
+        & > .file-name-plate {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        }
+    }
+
 `

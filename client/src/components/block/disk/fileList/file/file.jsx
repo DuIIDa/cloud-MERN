@@ -34,7 +34,7 @@ const File  = ({file}) => {
     // ПОКАЗ ФАЙЛОВ
     if(fileView === 'list') {
         return (
-            <FileBoxList onClick={file.type === 'dir' ? () => openDirHandler() : null}>
+            <FileBoxList onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgList src={file.type === 'dir' ? dirLogo : fileLogo}></ImgList>
                 <NameBlock className='list'>
                         {fileName.name}{fileName.format}

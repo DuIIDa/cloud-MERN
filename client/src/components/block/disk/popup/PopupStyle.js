@@ -20,7 +20,7 @@ export const PopupBlock = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;

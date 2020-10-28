@@ -14,7 +14,7 @@ const Login = () => {
 
     return (
         <Container>
-            <FormBlock>
+            <FormBlock onSubmit={e => e.preventDefault()}>
                 <Title>Вход</Title>
                 <Input value={email} setValue={setEmail} placeholder='Email' type='text'></Input>
                 <Input value={password} setValue={setPassword} placeholder='Password' type='password'></Input>

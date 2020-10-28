@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FormBlock = styled.div`
+export const FormBlock = styled.form`
     max-width: 537px;
     background: ${props => props.theme.colors.write};
     border-radius: 27px;

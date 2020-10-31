@@ -3,10 +3,9 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import {setPopupDisplay, createDir} from '../../../../actions/index'
 
+import {Input} from '../../../controls/inputs/input/input'
 import {PopupBlock, PopupContent, PopupHeader,
     PopupClose, PopupButton} from './PopupStyle'
-
-import Input from '../../../controls/inputs/inputsForm/input'
 
 
 export const Popup = () => {
@@ -29,8 +28,12 @@ export const Popup = () => {
                     <PopupClose onClick={() => dispatch(setPopupDisplay('none'))}>X</PopupClose>
                 </PopupHeader>
 
-                <Input type='text' value={dirName} 
-                setValue={setDirName} placeholder='Ввидетие имя новой папки...'></Input>
+                <Input 
+                    type='text' 
+                    value={dirName} 
+                    setValue={setDirName} 
+                    placeholder='Ввидетие имя новой папки...'>
+                </Input>
                 
                 <PopupButton onClick ={() => createDirHendler()}>Создать</PopupButton>
             </PopupContent>

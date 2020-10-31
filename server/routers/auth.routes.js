@@ -19,7 +19,7 @@ const File = require('../models/File')
 router.post('/registration', 
     [
         check('email', "Uncorrect email").isEmail(),
-        check('password', 'Password must be longer than 3 and shorter than 12').isLength({min:3, max:12})
+        check('password', 'Password must be longer than 3 and shorter than 12').isLength({min:6, max:30})
     ],
     async (req, res) => {
     try {

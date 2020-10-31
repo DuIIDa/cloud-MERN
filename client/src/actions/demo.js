@@ -78,7 +78,7 @@ export const auth = () => {
             )
 
             dispatch(setUser(response.data.user))
-            debugger
+
             localStorage.getItem('token') && localStorage.setItem('token', response.data.token)
             sessionStorage.getItem('token') && sessionStorage.setItem('token', response.data.token)
 

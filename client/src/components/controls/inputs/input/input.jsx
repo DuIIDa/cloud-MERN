@@ -1,14 +1,12 @@
 import React from 'react'
 import {InputStyle} from './inputStyle'
 
-const Input = (props) => {
+export const Input = (props) => {
     return (
         <InputStyle value={props.value} 
+            onBlur={(event) => props.onBlur(event.target.value)} 
             onChange={(event) => props.setValue(event.target.value)} 
             type={props.type} 
             placeholder={props.placeholder}/>
     )
 }
-
-
-export default Input

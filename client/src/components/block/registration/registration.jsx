@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Input from '../../controls/inputs/inputsForm/input'
+import {Input} from '../../controls/inputs/index'
 import ButtonReg from '../../controls/buttons/buttonsForm/buttonReg'
 import {Container} from '../../Container'
 
@@ -16,8 +16,19 @@ const Registration = () => {
         <Container>
             <FormBlock onSubmit={e => e.preventDefault()}>
                 <Title>Регистрация</Title>
-                <Input value={email} setValue={setEmail} placeholder='Email' type='text'></Input>
-                <Input value={password} setValue={setPassword} placeholder='Password' type='password'></Input>
+                <Input 
+                    value={email} 
+                    setValue={setEmail}
+                    placeholder='Email' 
+                    type='text'>
+                </Input>
+                
+                <Input 
+                    value={password} 
+                    setValue={setPassword} 
+                    placeholder='Password' 
+                    type='password'>
+                </Input>
                 <div>
                     <ButtonReg email={email} password={password}></ButtonReg>
                 </div>

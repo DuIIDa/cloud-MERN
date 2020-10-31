@@ -14,4 +14,14 @@ export const InputStyle = styled.input`
     &:hover {
         transform: scale(1.03)
     }
+
+    &.search {
+        width: 200px;
+        margin-left: 10px;
+        margin-bottom: 0;
+
+        @media (max-width: 400px) {
+        margin-top: 10px;
+        }
+    }
 `

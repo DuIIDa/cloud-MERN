@@ -4,11 +4,11 @@ import {login} from '../../../../actions/index'
 
 import {ButtonStyle} from './buttonStyle'
 
-const Button = ({email, password, staySystem}) => {
+const Button = ({disabled,email, password, staySystem}) => {
     const dispatch = useDispatch();
 
     return (
-        <ButtonStyle onClick={() => dispatch(login(email, password, staySystem))}>Вход</ButtonStyle>
+        <ButtonStyle disabled={disabled} onClick={() => dispatch(login(email, password, staySystem))}>Вход</ButtonStyle>
     )
 }
 

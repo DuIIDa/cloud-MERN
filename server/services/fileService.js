@@ -10,7 +10,7 @@ class FileService {
         return new Promise(((resolve, rejects) => {
             try {
 
-                if(!fs.existsSync(filePath)) { // Если файл по этому пути существует то
+                if(!fs.existsSync(filePath)) { // Если файл по этому пути не существует то
                     fs.mkdirSync(filePath) // создаем папку
                     return resolve({message: 'File was created!'})
                 } else { // если файл существует

@@ -2,8 +2,12 @@ import {useState, useEffect} from 'react';
 
 export const useValidation = (value, validations) => {
     const [isEmpty, setEmpty] = useState(true)
+
     const [minLength, setMinLength] = useState(false)
+    const [maxLength, setMaxLength] = useState(false)
+
     const [validEmail, setValidEmail] = useState( false)
+    const [validLogin, setValidLogin] = useState(false)
 
     const [textError, setTestError] = useState('')
     const [inputValid, setInputValid] = useState(false)
@@ -33,13 +37,33 @@ export const useValidation = (value, validations) => {
                     break;
                 }
 
+                case 'validLogin': {
+                    const reg = /^[A-Za-z0-9]+$/
+                    if(!reg.test(value)) {
+                        setValidLogin(true)
+                        setTestError('Login должен содержать только латинские буквы и цифры!')
+                    }else {
+                        setValidLogin(false)
+                    }
+                    break;
+                }
+
                 case 'minLength': {
                     if(value.length < validations[validation]) {
                         setMinLength(true)
-                        setTestError('Минимальное количество символов 6!')
+                        setTestError(`Минимальное количество символов ${validations[validation]}!`)
                     }else {
                         setMinLength(false)
-                        return
+                    } 
+                    break;
+                }
+
+                case 'maxLength': {
+                    if(value.length > validations[validation]) {
+                        setMaxLength(true)
+                        setTestError(`Максимальное количество символов ${validations[validation]}!`)
+                    }else {
+                        setMaxLength(false)
                     } 
                     break;
                 }
@@ -61,8 +85,12 @@ export const useValidation = (value, validations) => {
 
     return {
         isEmpty,
-        validEmail,
+
         minLength,
+        maxLength,
+
+        validEmail,
+        validLogin,
 
         textError,
         inputValid

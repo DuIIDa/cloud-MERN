@@ -19,7 +19,7 @@ const File = require('../models/File')
 router.post('/registration', 
     [
         check('email', "Uncorrect email").isEmail(),
-        check('password', 'Password must be longer than 3 and shorter than 12').isLength({min:6, max:30})
+        check('password', 'Password must be longer than 6 and shorter than 30').isLength({min:6, max:30})
     ],
     async (req, res) => {
     try {
@@ -29,18 +29,22 @@ router.post('/registration',
             return res.status(400).json({message: 'Uncorrect request', errors})
         }
 
-        const {email, password} = req.body
+        const {login, email, password} = req.body
 
-        const candidate = await User.findOne({email})
+        const candidateEmail = await User.findOne({email})
+        const candidateLogin = await User.findOne({login})
 
-        if(candidate) {
+        if(candidateEmail) {
             return res.status(400).json({message: `User with email: ${email} alredy exist!` })
+        }
+        if(candidateLogin) {
+            return res.status(400).json({message: `User with login: ${login} alredy exist!` })
         }
 
         // Защифровка пароля
         const hashPassword = await bcrypt.hash(password, 7)
         
-        const user =  new User({email, password: hashPassword})
+        const user =  new User({login, email, password: hashPassword})
         await user.save()
         await fileService.сreateDir(new File({user:user.id, name: ''}))
         return res.json({message: 'User was created!'})
@@ -56,8 +60,9 @@ router.post('/login',
     try {
         const secretKey = config.get('secretKey')
 
-        const {email, password} = req.body
-        const user = await User.findOne({email})
+        const {login, email, password} = req.body
+        const user = await User.findOne({email}) || await User.findOne({login})
+        
         if(!user){
             return res.status(404).json({message: 'User not found'})
         }
@@ -73,6 +78,7 @@ router.post('/login',
             token,
             user: {
                 id: user.id,
+                login: user.login,
                 email: user.email,
                 diskSpace: user.diskSpace,
                 usedSpace: user.usedSpace,
@@ -100,6 +106,7 @@ router.get('/auth', authMiddleware,
             token,
             user: {
                 id: user.id,
+                login: user.login,
                 email: user.email,
                 diskSpace: user.diskSpace,
                 usedSpace: user.usedSpace,

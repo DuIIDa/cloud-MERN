@@ -11,18 +11,19 @@ import {notificationProgres, notificationSuccess,
 
 //USER
 //Указываем куда будет отправляться запрос и что должны получить
-export const registration = (email, password) => {
+export const registration = (login, email, password) => {
    return async dispatch => {
         try {
             const response = await axios.post('http://192.168.43.24:5000/api/auth/registration', {
+                login,
                 email,
                 password
             })
-
+            
             store.addNotification({
                 ...notificationSuccess(response.data.message)
             })
-            dispatch(login(email, password))
+            dispatch(loginFunc(email, password))
         } catch (error) {
             console.log('error: ', error);
                 if(error.response) {
@@ -39,13 +40,24 @@ export const registration = (email, password) => {
    }
 }
 
-export const login = (email, password, staySystem = false) => {
+export const loginFunc = (emailOrLogin, password, staySystem = false) => {
     return async dispatch => {
         try {
-            const response = await axios.post('http://192.168.43.24:5000/api/auth/login', {
-                email,
-                password
-            })
+            let response
+            if(emailOrLogin.includes('@')) {
+                const email = emailOrLogin
+                response = await axios.post('http://192.168.43.24:5000/api/auth/login', {
+                    email,
+                    password
+                })
+            } else {
+                const login = emailOrLogin
+                response = await axios.post('http://192.168.43.24:5000/api/auth/login', {
+                    login,
+                    password
+                })
+            }
+            
             dispatch(setUser(response.data.user))
             
             if(staySystem)

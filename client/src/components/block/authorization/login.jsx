@@ -10,8 +10,8 @@ import {useInput} from '../../../customHooks/index'
 
 
 const Login = () => {
-    const email = useInput('', {isEmpty: true, validEmail: false})
-    const password = useInput('', {isEmpty: true, minLength: 3})
+    const emailOrLogin = useInput('', {isEmpty: true})
+    const password = useInput('', {isEmpty: true, minLength: 6})
     
     const [checkBox, setCheckBox] = useState(false)
 
@@ -20,11 +20,11 @@ const Login = () => {
             <FormBlock onSubmit={e => e.preventDefault()}>
                 <Title>Вход</Title>
 
-                {(email.isDirty && (email.isEmpty || email.validEmail)) && <div style={{color: 'red'}}>{email.textError}</div>}
-                <Input value={email.value} 
-                    onBlur={email.onBlur}
-                    setValue={email.onChange} 
-                    placeholder='Email' 
+                {(emailOrLogin.isDirty && (emailOrLogin.isEmpty)) && <div style={{color: 'red'}}>{emailOrLogin.textError}</div>}
+                <Input value={emailOrLogin.value} 
+                    onBlur={emailOrLogin.onBlur}
+                    setValue={emailOrLogin.onChange} 
+                    placeholder='Email or login' 
                     type='text'>
                 </Input>
 
@@ -40,8 +40,8 @@ const Login = () => {
                 <label>Остаться в системе</label>
                 
                 <div>
-                    <ButtonLog disabled={email.inputValid || password.inputValid}
-                         email={email.value} 
+                    <ButtonLog disabled={emailOrLogin.inputValid || password.inputValid}
+                         emailOrLogin={emailOrLogin.value} 
                          password={password.value} 
                          staySystem={checkBox}>
                     </ButtonLog>

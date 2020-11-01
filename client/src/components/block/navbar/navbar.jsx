@@ -55,7 +55,7 @@ const Navbar = () => {
                 <ContentBlock className='box-btn'>
                     {!isAuth && <ButtonEnter></ButtonEnter>}
                     {!isAuth && <ButtonReg></ButtonReg>}
-                    {isAuth &&  <NameUser>{currentUser.email}</NameUser>}
+                    {isAuth &&  <NameUser>{currentUser.login}</NameUser>}
                     {isAuth &&  <ButtonBack ></ButtonBack>}
                 </ContentBlock>
 

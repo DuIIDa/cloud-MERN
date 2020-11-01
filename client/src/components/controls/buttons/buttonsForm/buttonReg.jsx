@@ -5,11 +5,11 @@ import {registration} from '../../../../actions/index'
 
 import {ButtonStyle} from './buttonStyle'
 
-const Button = (props) => {
+const Button = ({login, email, password, disabled}) => {
     const dispatch = useDispatch()
 
     return (
-        <ButtonStyle onClick={() => dispatch(registration(props.email, props.password))}>Регистрация</ButtonStyle>
+        <ButtonStyle disabled={disabled} onClick={() => dispatch(registration(login, email, password))}>Регистрация</ButtonStyle>
     )
 }
 

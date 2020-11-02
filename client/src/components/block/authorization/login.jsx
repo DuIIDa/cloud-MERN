@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import {Input} from '../../controls/inputs/input/input'
 import ButtonLog from '../../controls/buttons/buttonsForm/buttonLog'
-import {Container} from '../../Container'
 
 import {FormBlock, Title} from './loginStyle'
 
@@ -16,38 +15,40 @@ const Login = () => {
     const [checkBox, setCheckBox] = useState(false)
 
     return (
-        <Container>
-            <FormBlock onSubmit={e => e.preventDefault()}>
-                <Title>Вход</Title>
+        <FormBlock onSubmit={e => e.preventDefault()}>
+            <Title>Вход</Title>
 
-                {(emailOrLogin.isDirty && (emailOrLogin.isEmpty)) && <div style={{color: 'red'}}>{emailOrLogin.textError}</div>}
-                <Input value={emailOrLogin.value} 
-                    onBlur={emailOrLogin.onBlur}
-                    setValue={emailOrLogin.onChange} 
-                    placeholder='Email or login' 
-                    type='text'>
-                </Input>
+            {(emailOrLogin.isDirty && (emailOrLogin.isEmpty)) && <div style={{color: 'red'}}>{emailOrLogin.textError}</div>}
+            <Input 
+                value={emailOrLogin.value} 
+                name='email'
+                onBlur={emailOrLogin.onBlur}
+                setValue={emailOrLogin.onChange} 
+                placeholder='Email or login' 
+                type='text'>
+            </Input>
 
-                {(password.isDirty && (password.isEmpty || password.minLength)) && <div style={{color: 'red'}}>{password.textError}</div>}
-                <Input value={password.value} 
-                    onBlur={password.onBlur}
-                    setValue={password.onChange} 
-                    placeholder='Password' 
-                    type='password'> 
-                </Input>
+            {(password.isDirty && (password.isEmpty || password.minLength)) && <div style={{color: 'red'}}>{password.textError}</div>}
+            <Input 
+                value={password.value}
+                name='password' 
+                onBlur={password.onBlur}
+                setValue={password.onChange} 
+                placeholder='Password' 
+                type='password'> 
+            </Input>
 
-                <input type='checkbox' onClick={e => setCheckBox(e.target.checked)}></input>
-                <label>Остаться в системе</label>
+            <input type='checkbox' onClick={e => setCheckBox(e.target.checked)}></input>
+            <label>Остаться в системе</label>
                 
-                <div>
-                    <ButtonLog disabled={emailOrLogin.inputValid || password.inputValid}
-                         emailOrLogin={emailOrLogin.value} 
-                         password={password.value} 
-                         staySystem={checkBox}>
-                    </ButtonLog>
-                </div>
-            </FormBlock>      
-        </Container>
+            <div>
+                <ButtonLog disabled={emailOrLogin.inputValid || password.inputValid}
+                    emailOrLogin={emailOrLogin.value} 
+                    password={password.value} 
+                    staySystem={checkBox}>
+                </ButtonLog>
+            </div>
+        </FormBlock>      
     )
 }
 

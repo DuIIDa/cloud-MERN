@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const NavbarContainer = styled.div`
-    background: ${props => props.theme.colors.write};
-    box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
+    background: ${props => props.theme.colors.writeNavbar};
+    box-shadow: -3px 20px 36px -3px rgba(34, 60, 80, 0.56);
     min-width: 400px;
 `
 

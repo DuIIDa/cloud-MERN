@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ButtonStyle = styled.button`
     background: ${props => props.theme.colors.fontColor};
     border-radius: 12px;
-    color: ${props => props.theme.colors.write};
+    color: ${props => props.theme.colors.writeNavbar};
     font-weight: bold;
     font-size: 22px;
     line-height: 26px;

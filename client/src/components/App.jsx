@@ -9,7 +9,7 @@ import 'animate.css/animate.compat.css'
 import { ThemeProvider } from 'styled-components'
 import theme from '../theme/theme'
 
-import {Container} from './Container'
+import {Container, BgContainer} from './Containers'
 import Navbar from './block/navbar/navbar'
 import Registration from './block/registration/registration'
 import Login from './block/authorization/login'
@@ -35,31 +35,35 @@ function App() {
     return (
         <BrowserRouter>
         <ReactNotification></ReactNotification>
+            <BgContainer>
             <ThemeProvider theme={theme}>
             <GlobalStyle></GlobalStyle>
                 <div className="App">
-                    <Navbar></Navbar>
+                        <Navbar></Navbar>
 
-                    {!isAuth ?
-                        <Switch>
-                            <Route path={REG} component={Registration}></Route>
-                            <Route path={LOG} component={Login}></Route>
-                            <Redirect to={LOG}></Redirect>
-                            {/*
-                                Если пользователь не сущ URL
-                                Тогда бдует вызва Redirect c маршрутом
-                            */}
-                        </Switch>
-                        :
-                        <Switch>
-                            <Container>
-                                <Route exact path='/' component={Disk}></Route>
-                                <Redirect to='/'></Redirect>
-                            </Container>
-                        </Switch>
-                    }
+                        {!isAuth ?
+                            <Switch>
+                                <Route path={REG} component={Registration}></Route>
+                                <Route path={LOG} component={Login}></Route>
+                                <Redirect to={LOG}></Redirect>
+                                {/*
+                                    Если пользователь не сущ URL
+                                    Тогда бдует вызва Redirect c маршрутом
+                                */}
+                            </Switch>
+                            :
+                            <Switch>
+                                <Container>
+                                    <Route exact path='/' component={Disk}></Route>
+                                    <Redirect to='/'></Redirect>
+                                </Container>
+                                
+                            </Switch>
+                        }
+                    
                 </div>
             </ThemeProvider>
+            </BgContainer>
         </BrowserRouter>
     );
 }

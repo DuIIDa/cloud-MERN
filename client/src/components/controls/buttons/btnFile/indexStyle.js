@@ -12,7 +12,7 @@ export const ImgBtn =styled.img`
 export const ButtonImg = styled.button`
     border: 0;
     outline: 0;
-    background-color: ${props => props.theme.colors.bgColor};
+    background-color: rgba(0,0,0,0);
     cursor: pointer;
 
 

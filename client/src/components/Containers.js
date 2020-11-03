@@ -3,6 +3,7 @@ import bgPuth from '../assets/img/bg.jpg'
 
 
 export const BgContainer = styled.div`
+    margin: 0 auto;
     width: 100%;
     height: 100%;
     background-image: url(${bgPuth});
@@ -18,11 +19,18 @@ export const BgContainer = styled.div`
 
 export const Container = styled.div`
     margin: 0 auto;
+    margin-top: 10px;
+    
+    min-height: 80%;
     max-width: 1140px;
     min-width: 400px;
+
     padding: 10px 80px;
-    background: ${props => props.theme.colors.writeContainer};
+
+    border-radius: 10px;
+    background: ${props => props.theme.colors.whiteContainer};
     box-shadow: 0px 14px 9px 9px rgba(34, 60, 80, 0.27);
+
     @media (max-width: 500px) {
         padding: 10px 15px;
     }

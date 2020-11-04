@@ -48,6 +48,7 @@ function App() {
                                 <Redirect to={LOG}></Redirect>
                                 {/*
                                     Если пользователь не сущ URL
+                                    
                                     Тогда бдует вызва Redirect c маршрутом
                                 */}
                             </Switch>

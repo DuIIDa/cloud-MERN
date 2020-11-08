@@ -140,6 +140,7 @@ export const getFiles = (dirId) => {
 export const createDir = (dirId, name) => {
     return async dispatch => {
         try {
+            
             const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response =  await axios.post(`http://192.168.43.24:5000/api/files`,{
                 name, 
@@ -165,6 +166,7 @@ export const createDir = (dirId, name) => {
 
 export const uploadFile = (file, dirId) => {
     return async dispatch => {
+        let uploadFile = {name: file.name, progress: 0, id: Date.now()}
         try {
             const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const formData = new FormData()
@@ -174,9 +176,7 @@ export const uploadFile = (file, dirId) => {
                 formData.append('parent', dirId )
             }
     
-            let uploadFile = {name: file.name, progress: 0, id: Date.now()}
             dispatch(addUploadFile(uploadFile))
-
             store.addNotification({
                 id: uploadFile.id,
                 ...notificationProgres(uploadFile),
@@ -199,12 +199,9 @@ export const uploadFile = (file, dirId) => {
                     }
                 }
             })
-
-            dispatch(addFile(response.data))
-
-            setTimeout(() => {
-                store.removeNotification(uploadFile.id)
-            }, 2000);
+            
+            dispatch(setUser(response.data.resUser))
+            dispatch(addFile(response.data.dbFile))
 
         } catch (error) {
             if(error.response) {
@@ -216,6 +213,10 @@ export const uploadFile = (file, dirId) => {
                     ...defaultNotfication('Unknown Error!')
                 })    
             }  
+        } finally {
+            setTimeout(() => {
+                store.removeNotification(uploadFile.id)
+            }, 2000);
         }
     }
 }
@@ -240,9 +241,10 @@ export const downloadFile = async (file) => {
     }
 }
 
-export const deleteFile = (file) => {
+export const deleteFile = (file, target) => {
     return async dispatch => {
         try {
+            target.style.display = 'none'
             const token = localStorage.getItem('token') || sessionStorage.getItem('token')
             const response = await axios.delete(`http://192.168.43.24:5000/api/files/delete?id=${file._id}`, {
                     headers: {
@@ -250,6 +252,7 @@ export const deleteFile = (file) => {
                     }
             })
 
+            dispatch(setUser(response.data.resUser))
             dispatch(deleteFileAction(file._id))
             store.addNotification({
                 ...notificationSuccess(response.data.message)
@@ -263,7 +266,8 @@ export const deleteFile = (file) => {
                 store.addNotification({
                     ...defaultNotfication('Unknown Error!')
                 })    
-            }          
+            }
+            target.style.display = ''  
         }
     }
 

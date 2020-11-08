@@ -8,7 +8,7 @@ export const DiskHeadContainer = styled.div`
 
     margin-bottom: 25px;
 
-    & > .test {
+    & > .btnBlockOne {
         display: flex;
         align-items: flex-end;
         flex-direction: row; 
@@ -35,8 +35,12 @@ export const BtnBlock = styled.div`
         margin-right: 15px;
     }
 
-    &.btn-grid {
-        flex-direction: row;
+    &.btnBlockTwo {
+        align-items: flex-end;
+
+        & > .usedSpace {
+            margin-bottom: 30px;
+        }
     }
 `
 

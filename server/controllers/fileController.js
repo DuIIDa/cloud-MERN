@@ -27,13 +27,14 @@ class FileController {
             return res.json(file)
         } catch (error) {
             console.log('error: ', error);
-            return res.status(400).json(e)
+            return res.status(400).json(error);
         }
     }
 
     async getFiles(req, res) {
         try {
             const files = await File.find({user: req.user.id, parent: req.query.parent})
+
             return res.json(files)
         } catch (error) {
             console.log('error: ', error); 
@@ -44,16 +45,14 @@ class FileController {
     async uploadFile(req, res) {
         try {
             const file = req.files.file
-
             const parent = await File.findOne({user: req.user.id, _id: req.body.parent})
             const user = await User.findOne({_id: req.user.id})
             
             if(user.usedSpace + file.size > user.diskSpace) {
                 return res.status(400).json({message: 'There no space on the disk!'})
             }
+    
 
-            user.usedSpace = user.usedSpace + file.size
-        
             let path;
             if(parent){
                 path = `${config.get('filePath')}\\${user._id}\\${parent.path}\\${file.name}`
@@ -86,9 +85,25 @@ class FileController {
             })
 
             await dbFile.save()
+            const allFileSize = await File.find({user: req.user.id})
+            
+            user.usedSpace = allFileSize.reduce((accum, item) => {
+                return accum += item.size
+            }, 0)
+            
+
+            const resUser = {
+                id: user.id,
+                login: user.login,
+                email: user.email,
+                diskSpace: user.diskSpace,
+                usedSpace: user.usedSpace,
+                avatar: user.avatar
+            }
+
             await user.save()
 
-            res.json(dbFile)
+            res.json({dbFile, resUser})
 
         } catch (error) {
             console.log('error: ', error); 
@@ -116,13 +131,32 @@ class FileController {
     async deleteFile(req, res) {
         try {
             const file = await File.findOne({_id: req.query.id, user: req.user.id})
+            const user = await User.findOne({_id: req.user.id})
+
+
             if(!file){
                 return res.status(400).json({message: 'File not found!'})
             }
-
+            
             fileService.deleteFile(file)
             await file.remove()
-            return res.json({message: 'File was deleted!'})
+
+            const allFileSize = await File.find({user: req.user.id})
+            user.usedSpace = allFileSize.reduce((accum, item) => {
+                return accum += item.size
+            }, 0)
+
+            const resUser = {
+                id: user.id,
+                login: user.login,
+                email: user.email,
+                diskSpace: user.diskSpace,
+                usedSpace: user.usedSpace,
+                avatar: user.avatar
+            }
+
+            await user.save()
+            return res.json({message: 'File was deleted!', resUser})
 
         } catch (error) {
             console.log('error: ', error);

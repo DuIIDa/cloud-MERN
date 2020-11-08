@@ -52,8 +52,8 @@ const FileList  = () => {
     if(files.length === 0) {
         return (
             <ImgBlock>
-                <img src={emptyDirPath} alt='Img not found'></img>
                 <p>Эта папка пуста!</p>
+                <img src={emptyDirPath} alt='Img not found'></img>
             </ImgBlock>
         )
     }

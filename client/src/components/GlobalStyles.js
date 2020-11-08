@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        transition:0.1s;
 
         & > #root {
             width: 100%;
@@ -20,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
         & >  .swiper-container {
             flex-basis: 60%;
             border-radius: 27px;
+            margin-bottom: 20px;
 
             @media (max-width: 900px) {
                 width: 100%;
@@ -39,7 +41,6 @@ const GlobalStyle = createGlobalStyle`
             justify-content: center;
             align-items: center;
         }
-
         
     }
 

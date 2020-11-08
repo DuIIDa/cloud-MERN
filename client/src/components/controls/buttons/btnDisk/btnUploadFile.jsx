@@ -11,7 +11,7 @@ export const BtnUploadFile = () => {
 
     const fileUploadHandler = (event) => {
         const files = [...event.target.files]
-        files.forEach(file => dispatch(uploadFile(file, currentDir.id)))
+        files.forEach((file) => dispatch(uploadFile(file, currentDir.id)))
     }
 
 

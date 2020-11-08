@@ -31,7 +31,7 @@ export const PopupContent = styled.div`
     display: flex;
     flex-direction: column;
     width: 400px;
-    background: ${props => props.theme.colors.write};  
+    background: ${props => props.theme.colors.whiteNavbar};  
     padding: 20px;
     border-radius: 12px;
     
@@ -81,4 +81,8 @@ export const PopupButton = styled.button`
     &:focus {
         outline: 0;
     }
+`
+
+export const InputBlock = styled.div`
+    margin-bottom: 20px;
 `

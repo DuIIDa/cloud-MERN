@@ -5,7 +5,7 @@ import {setPopupDisplay, createDir} from '../../../../actions/index'
 
 import {Input} from '../../../controls/inputs/input/input'
 import {PopupBlock, PopupContent, PopupHeader,
-    PopupClose, PopupButton} from './PopupStyle'
+    PopupClose, PopupButton, InputBlock} from './PopupStyle'
 
 
 export const Popup = () => {
@@ -28,12 +28,15 @@ export const Popup = () => {
                     <PopupClose onClick={() => dispatch(setPopupDisplay('none'))}>X</PopupClose>
                 </PopupHeader>
 
-                <Input 
-                    type='text' 
-                    value={dirName} 
-                    setValue={setDirName} 
-                    placeholder='Ввидетие имя новой папки...'>
-                </Input>
+                <InputBlock>
+                    <Input 
+                        type='text' 
+                        name='nameDir'
+                        value={dirName} 
+                        setValue={setDirName} 
+                        placeholder='Ввидетие имя новой папки...'>
+                    </Input>
+                </InputBlock>
                 
                 <PopupButton onClick ={() => createDirHendler()}>Создать</PopupButton>
             </PopupContent>

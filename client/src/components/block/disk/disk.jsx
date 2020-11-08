@@ -12,9 +12,11 @@ import { Popup } from './popup/Popup';
 
 import {Loader} from '../../loader/loader'
 
+import {formatSize} from './fileList/file/fileFormat'
 
 const Disk  = () => {
     const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.user.currentUser)
     const currentDir = useSelector(state=> state.files.currentDir)
     const loader = useSelector(state=> state.app.loader)
 
@@ -51,7 +53,7 @@ const Disk  = () => {
         <div onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
             <Title>{currentDir.id ? currentDir.path : 'Главная страница'}</Title>
             <DiskHeadContainer>
-                <div className = 'test'>
+                <div className = 'btnBlockOne'>
                     <BtnBlock>
                         <BtnBack></BtnBack>
                         <BtnCreateDir></BtnCreateDir>
@@ -61,9 +63,15 @@ const Disk  = () => {
                         <BtnUploadFile></BtnUploadFile>
                     </BtnBlock>
                 </div>
-                <BtnBlock className='btn-grid'>
-                    <BtnPlateGrid></BtnPlateGrid>
-                    <BtnListGrid></BtnListGrid>
+                <BtnBlock className='btnBlockTwo'>
+                    <div className='usedSpace'>
+                        {`${formatSize(currentUser.usedSpace)}/${formatSize(currentUser.diskSpace)}`}
+                    </div>
+                    
+                    <div>
+                        <BtnPlateGrid></BtnPlateGrid>
+                        <BtnListGrid></BtnListGrid>
+                    </div>
                 </BtnBlock>
 
             </DiskHeadContainer>

@@ -34,7 +34,7 @@ const File  = ({file}) => {
     // ПОКАЗ ФАЙЛОВ
     if(fileView === 'list') {
         return (
-            <FileBoxList onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
+            <FileBoxList className='file' onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgList src={file.type === 'dir' ? dirLogo : fileLogo}></ImgList>
                 <NameBlock className='list'>
                         {fileName.name}{fileName.format}
@@ -52,7 +52,7 @@ const File  = ({file}) => {
         )
     } else if(fileView === 'plate') {
         return (
-            <FileBoxPlate onClick={file.type === 'dir' ? () => openDirHandler() : null}>
+            <FileBoxPlate className='file' onClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgPlate src={file.type === 'dir' ? dirLogo : fileLogo}></ImgPlate>
                 <NameBlock className='plate'>
                     <p className = 'file-name-plate'>
@@ -67,7 +67,7 @@ const File  = ({file}) => {
                 <div className='box-plate-button'>
                     {file.type !== 'dir' && <ButtonDownload file={file}></ButtonDownload>}
                         
-                    <ButtonDeleted file={file}></ButtonDeleted>
+                    <ButtonDeleted file={file} blockStyle='flex'></ButtonDeleted>
                 </div>
             </FileBoxPlate>
         )

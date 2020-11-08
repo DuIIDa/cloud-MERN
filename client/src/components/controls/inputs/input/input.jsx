@@ -1,13 +1,13 @@
 import React from 'react'
 import {InputStyle} from './inputStyle'
 
-export const Input = (props) => {
+export const Input = ({value, name, onBlur, setValue, type, placeholder}) => {
     return (
-        <InputStyle value={props.value} 
-            name={props.name}
-            onBlur={(event) => props.onBlur(event.target.value)} 
-            onChange={(event) => props.setValue(event.target.value)} 
-            type={props.type} 
-            placeholder={props.placeholder}/>
+        <InputStyle value={value} 
+            name={name ? name : null}
+            onBlur={(event) => onBlur ? onBlur(event.target.value) : {}} 
+            onChange={(event) => setValue ? setValue(event.target.value) : {}} 
+            type={type ? type : null} 
+            placeholder={placeholder ? placeholder : null}/>
     )
 }

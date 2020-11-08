@@ -98,9 +98,15 @@ router.get('/auth', authMiddleware,
     async (req, res) => {
     try {
         const user = await User.findOne({_id: req.user.id})
+
         const secretKey = config.get('secretKey')
 
         const token = jwt.sign({id: user.id}, secretKey, {expiresIn: '1h'})
+
+        const allFileSize = await File.find({user: req.user.id})
+            user.usedSpace = allFileSize.reduce((accum, item) => {
+                return accum += item.size
+            }, 0)
 
         return res.json({
             token,
@@ -110,7 +116,6 @@ router.get('/auth', authMiddleware,
                 email: user.email,
                 diskSpace: user.diskSpace,
                 usedSpace: user.usedSpace,
-                avatar: user.avatar
             }
         })
     } catch (error) {

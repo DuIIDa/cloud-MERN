@@ -11,8 +11,11 @@ export const ButtonDeleted  = ({file}) => {
     const dispatch = useDispatch()
 
     const deleteClickHeandler = (event) => {
-        event.stopPropagation()
-        dispatch(deleteFile(file))
+        let target = event.target
+        target = target.closest('.file')
+        if(target) {
+            dispatch(deleteFile(file, target))
+        }
     }
 
     return (

@@ -40,10 +40,15 @@ export const LoginContainer = styled.div`
         margin: 10px 10px;
     }
 
+    @media (max-width: 500px) {
+        padding: 20px 10px 20px 10px;
+    }
+
 `
 
 export const FormBlock = styled.form`
-    flex-basis: 30%;
+    flex-basis: 35%;
+    width: 100%;
     background: ${props => props.theme.colors.white};
     border-radius: 27px;
     text-align: center;
@@ -74,5 +79,17 @@ export const FormBlock = styled.form`
     @media (max-width: 900px) {
         box-shadow: 0px 20px 36px 0px rgba(34, 60, 80, 0.5);
     }
+`
+
+export const InputBlock = styled.div`
+    position: relative;
+    margin-bottom: 24px;
+`
+
+export const ErrorBlock  = styled.div`
+    position: absolute;
+    top: -20px;
+    text-align: start;
+    color: red;
 `
 

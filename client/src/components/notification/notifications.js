@@ -7,7 +7,7 @@ const options = {
     animationIn: ["animated", "fadeIn"],
     animationOut: ["animated", "fadeOut"],
     dismiss: {
-        duration: 3000,
+        duration: 2000,
         onScreen: true
     }  
 };

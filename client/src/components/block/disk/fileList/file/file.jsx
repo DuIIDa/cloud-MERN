@@ -34,7 +34,9 @@ const File  = ({file}) => {
     // ПОКАЗ ФАЙЛОВ
     if(fileView === 'list') {
         return (
-            <FileBoxList className='file' onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
+            <FileBoxList className='file' 
+                onTouchEnd={file.type === 'dir' ? () => openDirHandler() : null} 
+                onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgList src={file.type === 'dir' ? dirLogo : fileLogo}></ImgList>
                 <NameBlock className='list'>
                         {fileName.name}{fileName.format}
@@ -52,7 +54,9 @@ const File  = ({file}) => {
         )
     } else if(fileView === 'plate') {
         return (
-            <FileBoxPlate className='file' onClick={file.type === 'dir' ? () => openDirHandler() : null}>
+            <FileBoxPlate className='file'
+            onTouchEnd={file.type === 'dir' ? () => openDirHandler() : null} 
+            onDoubleClick={file.type === 'dir' ? () => openDirHandler() : null}>
                 <ImgPlate src={file.type === 'dir' ? dirLogo : fileLogo}></ImgPlate>
                 <NameBlock className='plate'>
                     <p className = 'file-name-plate'>

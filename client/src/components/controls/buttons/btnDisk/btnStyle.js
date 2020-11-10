@@ -54,4 +54,8 @@ export const BtnGrid = styled.button`
     &.plate {
         background-image: url(${plate})
     }
+
+    &:hover {
+        transform: scale(1.08)
+    }
 `

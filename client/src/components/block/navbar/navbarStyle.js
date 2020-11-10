@@ -12,7 +12,7 @@ export const NavbarBlock = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 8px 50px 8px 50px;
+    padding: 8px 50px 0px 50px;
 
 `
             
@@ -21,8 +21,13 @@ export const ContentBlock = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    & > .title-site {
+        margin-right: 20px;
+    }
+
     @media (max-width: 775px) {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        align-items: flex-start;
 
         &.box-logo {
             flex-direction: column;
@@ -42,8 +47,8 @@ export const ContentBlock = styled.div`
 `
 
 export const ImgLogo = styled.img`
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     margin-right: 16px;
 `
 

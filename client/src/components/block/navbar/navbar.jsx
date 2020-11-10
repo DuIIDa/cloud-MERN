@@ -41,7 +41,7 @@ const Navbar = () => {
                 <ContentBlock className='box-logo'>
                     <ContentBlock>
                         <NavLink to='/'><ImgLogo src={Logo} alt="Logo"></ImgLogo></NavLink>
-                        <h3>MY<br></br>CLOUD</h3>
+                        <h3 className='title-site'>MY<br></br>CLOUD</h3>
                     </ContentBlock>
                     {isAuth && 
                             <Input placeholder='Название файла...' 

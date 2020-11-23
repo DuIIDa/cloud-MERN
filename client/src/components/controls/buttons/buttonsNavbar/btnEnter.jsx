@@ -4,6 +4,6 @@ import {ButtonStyle} from './buttonStyle'
 
 export const ButtonEnter = () => {
     return (
-        <ButtonStyle className='enter'><NavLink to='/login'>Войти</NavLink></ButtonStyle>
+        <NavLink to='/login'><ButtonStyle className='enter'>Войти</ButtonStyle></NavLink>
     )
 }

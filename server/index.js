@@ -12,7 +12,7 @@ const corsMiddleware = require('./middleware/cors.middleware')
 const app = express() //Создаем сервеР
 
 // Получаем номер порта(Предварительно)
-// Создав папку с default.json 
+// Создав папку с default.json
 const PORT = config.get('serverPort')
 const URL = config.get('dbUrl')
 
@@ -22,24 +22,23 @@ app.use(express.json())
 app.use('/api/auth', authRouter)
 app.use('/api/files', FileRouter)
 
-
 // Функция для подключение к базе данных
 // И запуск сервера
 // try ... catch Для отловли ошибок
 // Делаем ее async т.к подключаемся к базе
 const start = async () => {
-    try {
-        await mongoose.connect(URL)
+	try {
+		await mongoose.connect(URL)
 
-        // Пеер. параметр номер порта
-        // 2 параметр фукнция вызывается сразу посде
-        // запуска  сервера
-        app.listen(PORT, () => {
-            console.log('Server started on port', PORT);
-        })
-    } catch (error) {
-        console.log('error: ', error);
-    }
+		// Пеер. параметр номер порта
+		// 2 параметр фукнция вызывается сразу посде
+		// запуска  сервера
+		app.listen(PORT, () => {
+			console.log('Server started on port', PORT)
+		})
+	} catch (error) {
+		console.log('error: ', error)
+	}
 }
 
 start()

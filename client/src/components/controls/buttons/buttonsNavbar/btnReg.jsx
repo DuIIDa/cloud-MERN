@@ -4,6 +4,6 @@ import {ButtonStyle} from './buttonStyle'
 
 export const ButtonReg = () => {
     return (
-        <ButtonStyle className='registration'><NavLink to='/registration'>Регистрация</NavLink></ButtonStyle>
+        <NavLink to='/registration'><ButtonStyle className='registration'>Регистрация</ButtonStyle></NavLink>
     )
 }

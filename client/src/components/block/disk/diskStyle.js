@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const DiskHeadContainer = styled.div`
     display: flex;
@@ -11,10 +11,10 @@ export const DiskHeadContainer = styled.div`
     & > .btnBlockOne {
         display: flex;
         align-items: flex-end;
-        flex-direction: row; 
+        flex-direction: row;
 
         @media (max-width: 660px) {
-            flex-direction: column; 
+            flex-direction: column;
             align-items: flex-start;
         }
     }
@@ -44,13 +44,11 @@ export const BtnBlock = styled.div`
     }
 `
 
-
-
 export const DropAria = styled.div`
     width: 100%;
     height: calc(100vh - 50px - 40px);
     margin: 20px;
-    border: dashed ${props => props.theme.colors.fontColor} 2px;
+    border: dashed ${(props) => props.theme.colors.fontColor} 2px;
     display: flex;
     justify-content: center;
     align-items: center;
